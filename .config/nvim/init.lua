@@ -1,1 +1,2 @@
-print("hi")
+require("dmunkei")
+print("hi from nvim")
