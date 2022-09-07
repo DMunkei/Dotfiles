@@ -20,4 +20,9 @@ return require('packer').startup(function(use)
       }
   }
   use 'nvim-treesitter/nvim-treesitter'
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+
+  --HARPOOOOOOOOOON
+  use('ThePrimeagen/harpoon')
   end)
