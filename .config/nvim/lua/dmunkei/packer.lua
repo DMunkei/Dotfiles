@@ -22,6 +22,14 @@ return require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  -- LSP
+  use('neovim/nvim-lspconfig') -- Helps to manage and connect to different LSPs. Configurations only for different langauges to attach and manage them.
+  -- LSP Autocompletion
+  use('hrsh7th/cmp-nvim-lsp')
+  use('hrsh7th/nvim-cmp') 
+  use('hrsh7th/cmp-buffer')
+  use('hrsh7th/cmp-path')
+  use('L3MON4D3/LuaSnip')
 
   --HARPOOOOOOOOOON
   use('ThePrimeagen/harpoon')

@@ -1,4 +1,3 @@
-
 local nnoremap = require("dmunkei.keymap").nnoremap
 
 local silent = { silent = true }

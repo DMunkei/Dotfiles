@@ -22,5 +22,4 @@ vim.opt.shiftwidth =4
 
 vim.opt.wrap = false
 
-
 vim.opt.scrolloff = 8

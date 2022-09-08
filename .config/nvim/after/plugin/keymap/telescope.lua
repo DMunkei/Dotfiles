@@ -1,5 +1,4 @@
-local Remap = require("dmunkei.keymap")
-local nnoremap = Remap.nnoremap
+local nnoremap = require("dmunkei.keymap").nnoremap
 
 nnoremap("<C-s>", ":Telescope ")
 
@@ -20,10 +19,11 @@ end)
 nnoremap("<leader>gf", function()
     require('telescope.builtin').git_files()
 end)
-nnoremap("<Leader>s", function()
+nnoremap("<leader>s", function()
     require('telescope.builtin').find_files()
 end)
 
 nnoremap("<leader>gw", function()
     require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }
 end)
+
