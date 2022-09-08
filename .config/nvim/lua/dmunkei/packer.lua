@@ -30,7 +30,17 @@ return require('packer').startup(function(use)
   use('hrsh7th/cmp-buffer')
   use('hrsh7th/cmp-path')
   use('L3MON4D3/LuaSnip')
+  use('onsails/lspkind.nvim')
+
+
+  -- Debugging
+  use('mfussenegger/nvim-dap')
+  use('mfussenegger/nvim-dap-python')
+  use('nvim-telescope/telescope-dap.nvim')
+  use('theHamsta/nvim-dap-virtual-text')
+  use('rcarriga/nvim-dap-ui')
 
   --HARPOOOOOOOOOON
   use('ThePrimeagen/harpoon')
+
   end)
