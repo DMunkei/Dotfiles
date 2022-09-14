@@ -5,9 +5,31 @@ local daptext = require("nvim-dap-virtual-text")
 local remap = require("dmunkei.keymap")
 local nnoremap = remap.nnoremap
 
+require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 daptext.setup()
-dapui.setup()
-
+dapui.setup({
+  icons = { expanded = "", collapsed = "" },
+  layouts = {
+    {
+      elements = {
+        { id = "watches", size = 0.20 },
+        { id = "stacks", size = 0.20 },
+        { id = "breakpoints", size = 0.20 },
+        { id = "scopes", size = 0.40 },
+      },
+      size = 64,
+      position = "right",
+    },
+    {
+      elements = {
+        "repl",
+        "console",
+      },
+      size = 0.20,
+      position = "bottom",
+    },
+  },
+})
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open(1)
 end
@@ -18,10 +40,10 @@ dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
 end
 
-nnoremap("<Home>", function()
+nnoremap("dr", function()
     dapui.toggle(1)
 end)
-nnoremap("<End>", function()
+nnoremap("db", function()
     dapui.toggle(2)
 end)
 

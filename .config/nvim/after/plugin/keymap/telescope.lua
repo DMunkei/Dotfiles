@@ -8,7 +8,7 @@ nnoremap("<C-_>", function()
         --require('telescope.themes').get_ivy() -- Need to see which one I like more...
         {
             sorting_strategy="ascending",
-            prompt_position="top"
+            layout_config = { prompt_position="top" },
         }
     )
 end)
@@ -19,8 +19,12 @@ end)
 nnoremap("<leader>gf", function()
     require('telescope.builtin').git_files()
 end)
-nnoremap("<leader>s", function()
+nnoremap("<leader>ff", function()
     require('telescope.builtin').find_files()
+end)
+
+nnoremap("<leader>S", function()
+    require('telescope.builtin').live_grep()
 end)
 
 nnoremap("<leader>gw", function()

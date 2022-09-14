@@ -9,7 +9,11 @@ return require('packer').startup(function(use)
 
   -- Best theme world
   use 'rebelot/kanagawa.nvim'
-  
+
+  use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    } 
   -- Telescope
   use {
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -32,15 +36,14 @@ return require('packer').startup(function(use)
   use('L3MON4D3/LuaSnip')
   use('onsails/lspkind.nvim')
 
-
   -- Debugging
   use('mfussenegger/nvim-dap')
-  use('mfussenegger/nvim-dap-python')
   use('nvim-telescope/telescope-dap.nvim')
   use('theHamsta/nvim-dap-virtual-text')
   use('rcarriga/nvim-dap-ui')
-
+  use 'mfussenegger/nvim-dap-python'
   --HARPOOOOOOOOOON
   use('ThePrimeagen/harpoon')
 
+  use("mbbill/undotree")
   end)
