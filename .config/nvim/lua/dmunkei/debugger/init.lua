@@ -6,6 +6,7 @@ local remap = require("dmunkei.keymap")
 local nnoremap = remap.nnoremap
 
 require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+require('dap-python').test_runner = 'pytest'
 daptext.setup()
 dapui.setup({
   icons = { expanded = "", collapsed = "" },

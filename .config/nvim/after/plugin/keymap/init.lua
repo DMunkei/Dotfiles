@@ -17,13 +17,16 @@ nnoremap("<leader>u", ":UndotreeShow<CR>")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 
+nnoremap("n", "nzzzv")
+nnoremap("N", "Nzzzv")
+
 vnoremap("J", ":m '>+1<CR>gv=gv")
 vnoremap("K", ":m '<-2<CR>gv=gv")
 
 
 -- walking qflist
-nnoremap("<C-k>", "<cmd>cnext<CR>zz")
-nnoremap("<C-j>", "<cmd>cprev<CR>zz")
+nnoremap("<C-j>", "<cmd>cnext<CR>zz")
+nnoremap("<C-k>", "<cmd>cprev<CR>zz")
 
 
 -- Easier split navigation

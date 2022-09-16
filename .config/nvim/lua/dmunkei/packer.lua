@@ -2,8 +2,20 @@
 
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
+local packer = require'packer'
 
-return require('packer').startup(function(use)
+local packer_sync_group = vim.api.nvim_create_augroup("PackerSyncGroup", {clear = true})
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = {"packer.lua"},
+    callback = function()
+        print "Wassup"
+    end,
+    group=packer_sync_group
+})
+
+
+
+return packer.startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
@@ -13,7 +25,9 @@ return require('packer').startup(function(use)
   use {
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    } 
+    }
+  -- comments
+  use('terrortylor/nvim-comment')
   -- Telescope
   use {
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -23,16 +37,24 @@ return require('packer').startup(function(use)
           {'BurntSushi/ripgrep'},
       }
   }
-  use 'nvim-treesitter/nvim-treesitter'
+  use{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use('nvim-treesitter/playground')
+
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  use("simrat39/symbols-outline.nvim")
   -- LSP
-  use('neovim/nvim-lspconfig') -- Helps to manage and connect to different LSPs. Configurations only for different langauges to attach and manage them.
+   use {
+       "williamboman/mason.nvim",
+       "williamboman/mason-lspconfig.nvim",
+       "neovim/nvim-lspconfig", -- Helps to manage and connect to different LSPs. Configurations only for different langauges to attach and manage them.
+   }
   -- LSP Autocompletion
-  use('hrsh7th/cmp-nvim-lsp')
   use('hrsh7th/nvim-cmp') 
+  use('hrsh7th/cmp-nvim-lsp')
   use('hrsh7th/cmp-buffer')
   use('hrsh7th/cmp-path')
+
   use('L3MON4D3/LuaSnip')
   use('onsails/lspkind.nvim')
 
@@ -44,6 +66,9 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap-python'
   --HARPOOOOOOOOOON
   use('ThePrimeagen/harpoon')
-
   use("mbbill/undotree")
+
+  -- Things I'm experimeneting with.
+  -- Git
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   end)

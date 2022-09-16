@@ -4,6 +4,7 @@ dap.adapters.python = {
   command = '~/.virtualenvs/debugpy/bin/python';
   args = { '-m', 'debugpy.adapter' };
 }
+
 dap.configurations.python = {
   {
     -- The first three options are required by nvim-dap
@@ -29,3 +30,10 @@ dap.configurations.python = {
     end;
   },
 }
+table.insert(dap.configurations.python, {
+  type = 'python',
+  request = 'launch',
+  name = 'Django',
+  program = vim.fn.getcwd() .. '/manage.py',  -- NOTE: Adapt path to manage.py as needed
+  args = {'runserver', '--noreload'},
+})

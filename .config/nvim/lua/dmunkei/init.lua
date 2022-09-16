@@ -2,10 +2,12 @@ require("dmunkei.set")
 require("dmunkei.keymap")
 require("dmunkei.debugger")
 require("dmunkei.lualine")
+require("dmunkei.comment")
+require("dmunkei.treesitter")
+require("dmunkei.neogit")
 print("hi from dmunkei")
 
 local augroup = vim.api.nvim_create_augroup
-
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
 

@@ -2,11 +2,20 @@ local Remap = require("dmunkei.keymap")
 local nnoremap = Remap.nnoremap
 local inoremap = Remap.inoremap
 
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+require("mason-lspconfig").setup()
 local status_ok, lsp_config = pcall(require, 'lspconfig')
 if not status_ok then
     vim.inspect("fuck")
 end
-
 local lspkind = require('lspkind')
 
 
@@ -20,11 +29,14 @@ local function config(_config)
             nnoremap("gT", function() vim.lsp.buf.type_definition() end)
             nnoremap("gi", function() vim.lsp.buf.implementation() end)
             nnoremap("K", function() vim.lsp.buf.hover() end)
+
             nnoremap("<leader>df", function() vim.diagnostic.goto_next() end)
             nnoremap("<leader>dp", function() vim.diagnostic.goto_prev() end)
+			nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
             nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
             nnoremap("<leader>rr", function() vim.lsp.buf.references() end)
             nnoremap("<leader>ws", function() vim.lsp.buf.workspace_symbol() end)
+
             inoremap("<C-k>", function() vim.lsp.buf.signature_help() end)
             nnoremap("<leader>ca", function() vim.lsp.buf.code_action() end)
             nnoremap("<leader>co", function() vim.lsp.buf.code_action({
@@ -34,6 +46,7 @@ local function config(_config)
                     end
 
                     local data = code_action.data.id
+                    print(data)
                     return string.sub(data, #data - 1, #data) == ":0"
                 end,
                 apply = true
@@ -42,6 +55,10 @@ local function config(_config)
     },
     _config or {})
 end
+
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Setup nvim-cmp.
 local cmp = require("cmp")
@@ -76,8 +93,31 @@ cmp.setup({
     },
 	sources = {
 		{ name = "nvim_lsp" },
+		{ name = "path" },
 		{ name = "luasnip" },-- For luasnip user.
-		{ name = "buffer" },
+		{ name = "buffer", keyword_length = 5 },
 	},
 })
-lsp_config.pyright.setup(config())
+local opts = {
+	-- whether to highlight the currently hovered symbol
+	-- disable if your cpu usage is higher than you want it
+	-- or you just hate the highlight
+	-- default: true
+	highlight_hovered_item = true,
+
+	-- whether to show outline guides
+	-- default: true
+	show_guides = true,
+}
+
+require("symbols-outline").setup(opts)
+
+
+
+lsp_config.pylsp.setup(config({
+configurationSources = {'flake8'},
+}))
+lsp_config.jedi_language_server.setup(config())
+lsp_config.sumneko_lua.setup(config())
+lsp_config.vuels.setup(config())
+lsp_config.tsserver.setup(config())

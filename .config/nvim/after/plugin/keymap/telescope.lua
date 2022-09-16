@@ -13,7 +13,7 @@ nnoremap("<C-_>", function()
     )
 end)
 
-nnoremap("<leader>gs", function()
+nnoremap("<leader>fs", function()
     require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})
 end)
 nnoremap("<leader>gf", function()
