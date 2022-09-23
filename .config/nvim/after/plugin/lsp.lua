@@ -18,7 +18,6 @@ if not status_ok then
 end
 local lspkind = require('lspkind')
 
-
 --Need to figure out how to make this get passed to ALL of my LSP clients.
 local function config(_config)
     return vim.tbl_deep_extend("force", 
@@ -56,48 +55,47 @@ local function config(_config)
     _config or {})
 end
 
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- Setup nvim-cmp.
-local cmp = require("cmp")
-local source_mapping = {
-	buffer = "[Buffer]",
-	nvim_lsp = "[LSP]",
-	nvim_lua = "[Lua]",
-	path = "[Path]",
-}
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)-- For `luasnip` user.
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','s'}),
-        ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','s'}),
-		["<C-u>"] = cmp.mapping.scroll_docs(-4),
-		["<C-d>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-	}),
-    formatting = {
-        format = function(entry, vim_item)
-            vim_item.kind = lspkind.presets.default[vim_item.kind]
-            local menu = source_mapping[entry.source.name]
-            vim_item.menu = menu
-            return vim_item
-        end,
-    },
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "path" },
-		{ name = "luasnip" },-- For luasnip user.
-		{ name = "buffer", keyword_length = 5 },
-	},
-})
+-- -- Setup nvim-cmp.
+-- local cmp = require("cmp")
+-- local source_mapping = {
+-- 	buffer = "[Buffer]",
+-- 	nvim_lsp = "[LSP]",
+-- 	nvim_lua = "[Lua]",
+-- 	path = "[Path]",
+-- }
+--
+-- cmp.setup({
+-- 	snippet = {
+-- 		expand = function(args)
+-- 			require("luasnip").lsp_expand(args.body)-- For `luasnip` user.
+-- 		end,
+-- 	},
+-- 	mapping = cmp.mapping.preset.insert({
+--         ['<CR>'] = cmp.mapping.confirm({ select = true }),
+--         ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','s'}),
+--         ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','s'}),
+-- 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+-- 		["<C-d>"] = cmp.mapping.scroll_docs(4),
+-- 		["<C-Space>"] = cmp.mapping.complete(),
+-- 	}),
+--     formatting = {
+--         format = function(entry, vim_item)
+--             vim_item.kind = lspkind.presets.default[vim_item.kind]
+--             local menu = source_mapping[entry.source.name]
+--             vim_item.menu = menu
+--             return vim_item
+--         end,
+--     },
+-- 	sources = {
+-- 		{ name = "luasnip" },-- For luasnip user.
+-- 		{ name = "nvim_lsp" },
+-- 		{ name = "path" },
+-- 		{ name = "buffer", keyword_length = 5 },
+-- 	},
+-- })
 local opts = {
 	-- whether to highlight the currently hovered symbol
 	-- disable if your cpu usage is higher than you want it
@@ -113,11 +111,11 @@ local opts = {
 require("symbols-outline").setup(opts)
 
 
-
 lsp_config.pylsp.setup(config({
-configurationSources = {'flake8'},
+    configurationSources = {'flake8'},
 }))
 lsp_config.jedi_language_server.setup(config())
 lsp_config.sumneko_lua.setup(config())
 lsp_config.vuels.setup(config())
+lsp_config.volar.setup(config())
 lsp_config.tsserver.setup(config())

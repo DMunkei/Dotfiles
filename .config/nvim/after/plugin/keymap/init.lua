@@ -3,12 +3,12 @@ if not status_ok then
     print("rip")
     return
 end
+
 local nnoremap = Remap.nnoremap
 local vnoremap = Remap.vnoremap
 local inoremap = Remap.inoremap
 local xnoremap = Remap.xnoremap
 local nmap = Remap.nmap
-
 
 
 nnoremap("<leader>e", ":Lex<CR>")
@@ -45,7 +45,5 @@ nmap("<leader>Y", "\"+Y")
 
 nnoremap("<leader>d", "\"_d")
 vnoremap("<leader>d", "\"_d")
-
-
 
 nnoremap("<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")

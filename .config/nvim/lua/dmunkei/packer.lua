@@ -8,7 +8,8 @@ local packer_sync_group = vim.api.nvim_create_augroup("PackerSyncGroup", {clear 
 vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = {"packer.lua"},
     callback = function()
-        print "Wassup"
+        vim.cmd [[source %]]
+        packer.sync()
     end,
     group=packer_sync_group
 })
@@ -38,6 +39,7 @@ return packer.startup(function(use)
       }
   }
   use{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use 'nvim-treesitter/nvim-treesitter-context'
   use('nvim-treesitter/playground')
 
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -54,8 +56,9 @@ return packer.startup(function(use)
   use('hrsh7th/cmp-nvim-lsp')
   use('hrsh7th/cmp-buffer')
   use('hrsh7th/cmp-path')
+  use('/saadparwaiz1/cmp_luasnip')
 
-  use('L3MON4D3/LuaSnip')
+  use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
   use('onsails/lspkind.nvim')
 
   -- Debugging
