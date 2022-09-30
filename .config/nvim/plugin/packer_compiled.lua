@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -97,7 +102,7 @@ _G.packer_plugins = {
   cmp_luasnip = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
-    url = "https://github.com//saadparwaiz1/cmp_luasnip"
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   harpoon = {
     loaded = true,
@@ -129,10 +134,20 @@ _G.packer_plugins = {
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  neoformat = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neoformat",
+    url = "https://github.com/sbdchd/neoformat"
+  },
   neogit = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neogit",
     url = "https://github.com/TimUntersberger/neogit"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -163,6 +178,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
     url = "https://github.com/theHamsta/nvim-dap-virtual-text"
+  },
+  ["nvim-lightbulb"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/nvim-lightbulb",
+    url = "https://github.com/kosayoda/nvim-lightbulb"
   },
   ["nvim-lspconfig"] = {
     loaded = true,

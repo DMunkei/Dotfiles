@@ -115,7 +115,15 @@ lsp_config.pylsp.setup(config({
     configurationSources = {'flake8'},
 }))
 lsp_config.jedi_language_server.setup(config())
-lsp_config.sumneko_lua.setup(config())
+lsp_config.sumneko_lua.setup(config({
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+}))
 lsp_config.vuels.setup(config())
 lsp_config.volar.setup(config())
 lsp_config.tsserver.setup(config())

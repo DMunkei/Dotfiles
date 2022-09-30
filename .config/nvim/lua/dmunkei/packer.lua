@@ -4,18 +4,6 @@
 vim.cmd [[packadd packer.nvim]]
 local packer = require'packer'
 
-local packer_sync_group = vim.api.nvim_create_augroup("PackerSyncGroup", {clear = true})
-vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = {"packer.lua"},
-    callback = function()
-        vim.cmd [[source %]]
-        packer.sync()
-    end,
-    group=packer_sync_group
-})
-
-
-
 return packer.startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
@@ -51,12 +39,14 @@ return packer.startup(function(use)
        "williamboman/mason-lspconfig.nvim",
        "neovim/nvim-lspconfig", -- Helps to manage and connect to different LSPs. Configurations only for different langauges to attach and manage them.
    }
+
+   use 'jose-elias-alvarez/null-ls.nvim'
   -- LSP Autocompletion
-  use('hrsh7th/nvim-cmp') 
+  use('hrsh7th/nvim-cmp')
   use('hrsh7th/cmp-nvim-lsp')
   use('hrsh7th/cmp-buffer')
   use('hrsh7th/cmp-path')
-  use('/saadparwaiz1/cmp_luasnip')
+  use('saadparwaiz1/cmp_luasnip')
 
   use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
   use('onsails/lspkind.nvim')
@@ -74,4 +64,9 @@ return packer.startup(function(use)
   -- Things I'm experimeneting with.
   -- Git
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  use {
+      'kosayoda/nvim-lightbulb',
+      requires = 'antoinemadec/FixCursorHold.nvim',
+  }
+  use 'sbdchd/neoformat'
   end)
