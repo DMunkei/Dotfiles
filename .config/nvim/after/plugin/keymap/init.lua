@@ -6,13 +6,18 @@ end
 
 local nnoremap = Remap.nnoremap
 local vnoremap = Remap.vnoremap
-local inoremap = Remap.inoremap
 local xnoremap = Remap.xnoremap
 local nmap = Remap.nmap
 
-
 nnoremap("<leader>e", ":Lex<CR>")
 nnoremap("<leader>u", ":UndotreeShow<CR>")
+
+-- Format
+nnoremap("<leader>F", ":Neoformat<CR>")
+
+-- Toggle nolist
+nnoremap("<F8>", ":set nolist!<CR>")
+
 -- Center page when scrolling
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
@@ -22,7 +27,6 @@ nnoremap("N", "Nzzzv")
 
 vnoremap("J", ":m '>+1<CR>gv=gv")
 vnoremap("K", ":m '<-2<CR>gv=gv")
-
 
 -- walking qflist
 nnoremap("<C-j>", "<cmd>cnext<CR>zz")
@@ -46,4 +50,5 @@ nmap("<leader>Y", "\"+Y")
 nnoremap("<leader>d", "\"_d")
 vnoremap("<leader>d", "\"_d")
 
+--rename under cursor
 nnoremap("<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")

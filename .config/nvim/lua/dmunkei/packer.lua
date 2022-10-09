@@ -1,5 +1,6 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
+function get_config(name) return string.format('require("dmunkei/%s")', name) end
+function get_default(name) return string.format('require("%s").setup()', name) end
+--
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 local packer = require'packer'
@@ -15,8 +16,6 @@ return packer.startup(function(use)
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
-  -- comments
-  use('terrortylor/nvim-comment')
   -- Telescope
   use {
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -28,28 +27,38 @@ return packer.startup(function(use)
   }
   use{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use 'nvim-treesitter/nvim-treesitter-context'
-  use('nvim-treesitter/playground')
-
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-  use("simrat39/symbols-outline.nvim")
   -- LSP
-   use {
-       "williamboman/mason.nvim",
-       "williamboman/mason-lspconfig.nvim",
-       "neovim/nvim-lspconfig", -- Helps to manage and connect to different LSPs. Configurations only for different langauges to attach and manage them.
-   }
+   use { "neovim/nvim-lspconfig"}
 
-   use 'jose-elias-alvarez/null-ls.nvim'
-  -- LSP Autocompletion
-  use('hrsh7th/nvim-cmp')
-  use('hrsh7th/cmp-nvim-lsp')
-  use('hrsh7th/cmp-buffer')
-  use('hrsh7th/cmp-path')
-  use('saadparwaiz1/cmp_luasnip')
-
-  use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+    -- CMP
+    use({
+        "hrsh7th/nvim-cmp",
+        requires = {
+            {"tzachar/cmp-tabnine", run = "./install.sh"},
+            "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-omni", "hrsh7th/cmp-calc", "hrsh7th/cmp-emoji",
+            "L3MON4D3/LuaSnip", 'saadparwaiz1/cmp_luasnip',
+            "rafamadriz/friendly-snippets", "f3fora/cmp-spell"
+        },
+        config = get_config("cmp")
+    })
   use('onsails/lspkind.nvim')
+  use'windwp/nvim-autopairs'
+
+  --Tests
+    use {
+        "nvim-neotest/neotest",
+        requires = {
+            "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter",
+            "antoinemadec/FixCursorHold.nvim", "nvim-neotest/neotest-go",
+            "nvim-neotest/neotest-python", "rouge8/neotest-rust",
+            "haydenmeade/neotest-jest"
+        }
+    }
+
 
   -- Debugging
   use('mfussenegger/nvim-dap')
@@ -57,16 +66,25 @@ return packer.startup(function(use)
   use('theHamsta/nvim-dap-virtual-text')
   use('rcarriga/nvim-dap-ui')
   use 'mfussenegger/nvim-dap-python'
-  --HARPOOOOOOOOOON
+
+
+  -- formatter
+  use 'sbdchd/neoformat'
+ -- use 'jose-elias-alvarez/null-ls.nvim'
+  -- useful
   use('ThePrimeagen/harpoon')
   use("mbbill/undotree")
-
-  -- Things I'm experimeneting with.
-  -- Git
+  use "lukas-reineke/indent-blankline.nvim"
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use {
       'kosayoda/nvim-lightbulb',
       requires = 'antoinemadec/FixCursorHold.nvim',
   }
-  use 'sbdchd/neoformat'
+  use {
+      'lewis6991/gitsigns.nvim',
+      config = function()
+          require('gitsigns').setup()
+      end
+  }
+  use('terrortylor/nvim-comment')
   end)

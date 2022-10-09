@@ -29,3 +29,6 @@ require('kanagawa').setup({
 })
 
 vim.cmd("colorscheme kanagawa")
+
+vim.api.nvim_set_hl(0, "Linenr", {bg = "none", fg = "#C0A36E"})
+vim.cmd [[highlight IndentBlanklineContextStart guisp=#FF0000 gui=underline]]

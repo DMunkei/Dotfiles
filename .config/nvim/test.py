@@ -4,4 +4,4 @@ def bla(x, y):
     a = [1, 2, 3, 4, 5]
     for x in a:
         print(x)
-    return s+x
+    return s + x

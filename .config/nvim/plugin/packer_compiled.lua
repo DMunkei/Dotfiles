@@ -89,25 +89,76 @@ _G.packer_plugins = {
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
+  ["cmp-calc"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-calc",
+    url = "https://github.com/hrsh7th/cmp-calc"
+  },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
+  ["cmp-emoji"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-emoji",
+    url = "https://github.com/hrsh7th/cmp-emoji"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
+    url = "https://github.com/hrsh7th/cmp-nvim-lua"
+  },
+  ["cmp-omni"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-omni",
+    url = "https://github.com/hrsh7th/cmp-omni"
   },
   ["cmp-path"] = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  ["cmp-spell"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-spell",
+    url = "https://github.com/f3fora/cmp-spell"
+  },
+  ["cmp-tabnine"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp-tabnine",
+    url = "https://github.com/tzachar/cmp-tabnine"
+  },
   cmp_luasnip = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["kanagawa.nvim"] = {
     loaded = true,
@@ -124,16 +175,6 @@ _G.packer_plugins = {
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["mason-lspconfig.nvim"] = {
-    loaded = true,
-    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
-    url = "https://github.com/williamboman/mason-lspconfig.nvim"
-  },
-  ["mason.nvim"] = {
-    loaded = true,
-    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/mason.nvim",
-    url = "https://github.com/williamboman/mason.nvim"
-  },
   neoformat = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neoformat",
@@ -144,12 +185,38 @@ _G.packer_plugins = {
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neogit",
     url = "https://github.com/TimUntersberger/neogit"
   },
-  ["null-ls.nvim"] = {
+  neotest = {
     loaded = true,
-    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neotest",
+    url = "https://github.com/nvim-neotest/neotest"
+  },
+  ["neotest-go"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neotest-go",
+    url = "https://github.com/nvim-neotest/neotest-go"
+  },
+  ["neotest-jest"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neotest-jest",
+    url = "https://github.com/haydenmeade/neotest-jest"
+  },
+  ["neotest-python"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neotest-python",
+    url = "https://github.com/nvim-neotest/neotest-python"
+  },
+  ["neotest-rust"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/neotest-rust",
+    url = "https://github.com/rouge8/neotest-rust"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
+    config = { 'require("dmunkei/cmp")' },
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
@@ -210,11 +277,6 @@ _G.packer_plugins = {
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  playground = {
-    loaded = true,
-    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/playground",
-    url = "https://github.com/nvim-treesitter/playground"
-  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/plenary.nvim",
@@ -224,11 +286,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/ripgrep",
     url = "https://github.com/BurntSushi/ripgrep"
-  },
-  ["symbols-outline.nvim"] = {
-    loaded = true,
-    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
-    url = "https://github.com/simrat39/symbols-outline.nvim"
   },
   ["telescope-dap.nvim"] = {
     loaded = true,
@@ -253,6 +310,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require("dmunkei/cmp")
+time([[Config for nvim-cmp]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
