@@ -17,6 +17,7 @@ return packer.startup(function(use)
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
   -- Telescope
+  use {'nvim-telescope/telescope-ui-select.nvim' }
   use {
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
       -- or                            , branch = '0.1.x',
@@ -31,6 +32,8 @@ return packer.startup(function(use)
 
   -- LSP
    use { "neovim/nvim-lspconfig"}
+   use 'simrat39/rust-tools.nvim'
+
 
     -- CMP
     use({
@@ -45,7 +48,6 @@ return packer.startup(function(use)
         },
         config = get_config("cmp")
     })
-  use('onsails/lspkind.nvim')
   use'windwp/nvim-autopairs'
 
   --Tests
@@ -53,7 +55,7 @@ return packer.startup(function(use)
         "nvim-neotest/neotest",
         requires = {
             "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim", "nvim-neotest/neotest-go",
+            "antoinemadec/FixCursorHold.nvim",
             "nvim-neotest/neotest-python", "rouge8/neotest-rust",
             "haydenmeade/neotest-jest"
         }
@@ -66,7 +68,6 @@ return packer.startup(function(use)
   use('theHamsta/nvim-dap-virtual-text')
   use('rcarriga/nvim-dap-ui')
   use 'mfussenegger/nvim-dap-python'
-
 
   -- formatter
   use 'sbdchd/neoformat'
@@ -87,4 +88,19 @@ return packer.startup(function(use)
       end
   }
   use('terrortylor/nvim-comment')
+  use'iamcco/markdown-preview.nvim'
+  use'tpope/vim-dadbod'
+  use'epwalsh/obsidian.nvim'
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use'tpope/vim-surround'
+
   end)

@@ -1,4 +1,5 @@
 local nnoremap = require('dmunkei.keymap').nnoremap
+local inoremap = require('dmunkei.keymap').inoremap
 
 local M = {}
 
@@ -16,7 +17,7 @@ local M = {}
      nnoremap('gd', vim.lsp.buf.definition, bufopts)
      nnoremap('K', vim.lsp.buf.hover, bufopts)
      nnoremap('gi', vim.lsp.buf.implementation, bufopts)
-     nnoremap('<C-k>', vim.lsp.buf.signature_help, bufopts)
+     inoremap('<C-k>', vim.lsp.buf.signature_help, bufopts)
 
      nnoremap('<space>D', vim.lsp.buf.type_definition, bufopts)
      nnoremap('<space>rn', vim.lsp.buf.rename, bufopts)
