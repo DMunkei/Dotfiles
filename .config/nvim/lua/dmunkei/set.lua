@@ -35,7 +35,7 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "120"
 vim.opt.signcolumn = "auto:1-5"
 
-vim.opt.list = true
+vim.opt.list = false
 vim.opt.listchars:append "space:⋅"
 vim.opt.listchars:append "eol:↴"
 vim.opt.termguicolors = true
