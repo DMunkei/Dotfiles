@@ -139,6 +139,11 @@ _G.packer_plugins = {
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -261,16 +266,16 @@ _G.packer_plugins = {
     path = "/home/koestler/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
     url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
   },
+  ["nvim-ts-rainbow"] = {
+    loaded = true,
+    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow",
+    url = "https://github.com/p00f/nvim-ts-rainbow"
+  },
   ["nvim-web-devicons"] = {
     loaded = false,
     needs_bufread = false,
     path = "/home/koestler/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
-  },
-  ["obsidian.nvim"] = {
-    loaded = true,
-    path = "/home/koestler/.local/share/nvim/site/pack/packer/start/obsidian.nvim",
-    url = "https://github.com/epwalsh/obsidian.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,

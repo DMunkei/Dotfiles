@@ -12,29 +12,36 @@ return packer.startup(function(use)
   -- Best theme world
   use 'rebelot/kanagawa.nvim'
 
-  use {
-      'nvim-lualine/lualine.nvim',
+  use {'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
   -- Telescope
   use {'nvim-telescope/telescope-ui-select.nvim' }
-  use {
-      'nvim-telescope/telescope.nvim', tag = '0.1.0',
+  use {'nvim-telescope/telescope.nvim', tag = '0.1.0',
       -- or                            , branch = '0.1.x',
       requires = {
           {'nvim-lua/plenary.nvim'},
           {'BurntSushi/ripgrep'},
       }
   }
-  use{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  --
+ -- Treesitter
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        requires = {
+            "p00f/nvim-ts-rainbow", "nvim-treesitter/nvim-treesitter-context"
+        },
+        run = ":TSUpdate"
+    })
   use 'nvim-treesitter/nvim-treesitter-context'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- LSP
-   use { "neovim/nvim-lspconfig"}
+   use {
+    "neovim/nvim-lspconfig",
+    }
+
    use 'simrat39/rust-tools.nvim'
-
-
     -- CMP
     use({
         "hrsh7th/nvim-cmp",
@@ -71,7 +78,6 @@ return packer.startup(function(use)
 
   -- formatter
   use 'sbdchd/neoformat'
- -- use 'jose-elias-alvarez/null-ls.nvim'
   -- useful
   use('ThePrimeagen/harpoon')
   use("mbbill/undotree")
@@ -90,7 +96,6 @@ return packer.startup(function(use)
   use('terrortylor/nvim-comment')
   use'iamcco/markdown-preview.nvim'
   use'tpope/vim-dadbod'
-  use'epwalsh/obsidian.nvim'
   use {
     "folke/zen-mode.nvim",
     config = function()
@@ -102,5 +107,5 @@ return packer.startup(function(use)
     end
   }
   use'tpope/vim-surround'
-
+  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   end)

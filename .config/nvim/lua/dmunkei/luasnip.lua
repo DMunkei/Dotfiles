@@ -1,6 +1,11 @@
-local nnoremap = require('dmunkei.keymap').nnoremap
 require("luasnip.loaders.from_vscode").lazy_load()
 local ls = require('luasnip')
+local s = ls.snippet
+local t = ls.text_node
+local i = ls.insert_node
+local extras = require("luasnip.extras")
+local rep = extras.rep
+
 ls.setup{
     history = true
 }
@@ -21,3 +26,9 @@ vim.keymap.set({ "i", "s" }, "<c-j>", function()
     ls.jump(-1)
   end
 end, { silent = true })
+
+ls.add_snippets("rust", {
+    s({trig= "prd", dscr= "Named debug print {:?}"}, {
+        t("println!(\""), i(1, "var"), t(" = {:?}\", "), rep(1), t(");")
+    })
+})
