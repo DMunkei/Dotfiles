@@ -4,7 +4,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 local servers = {
     "pylsp", "jedi_language_server", "vuels", "tsserver", "vimls",
-    "html", "cssls", "emmet_ls", "clangd", "rust_analyzer" , "bashls"
+    "html", "cssls", "emmet_ls", "clangd", "rust_analyzer" , "bashls",
 }
   -- Set up lspconfig.
 for _, server in ipairs(servers) do
@@ -14,5 +14,9 @@ for _, server in ipairs(servers) do
     }
 end
 
+nvim_lsp.gdscript.setup{
+cmd = vim.lsp.rpc.connect("127.0.0.1", "6005")
+
+}
 require("dmunkei.custom_server.rust")
 require("dmunkei.custom_server.sumneko")
