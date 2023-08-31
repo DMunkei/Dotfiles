@@ -51,11 +51,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-local packer_sync_group = vim.api.nvim_create_augroup("PACKER", {clear = true})
-vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = "packer.lua",
-    group=packer_sync_group,
-    command = 'source <afile>',
-})
+-- local packer_sync_group = vim.api.nvim_create_augroup("PACKER", {clear = true})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--     pattern = "packer.lua",
+--     group=packer_sync_group,
+--     command = 'source <afile>',
+-- })
 
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]

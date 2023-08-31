@@ -6,49 +6,42 @@ function get_default(name)
 	return string.format('require("%s").setup()', name)
 end
 
--- Only required if you have packer configured as `opt`
-vim.cmd([[packadd packer.nvim]])
-local packer = require("packer")
-
-return packer.startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
-
+require('lazy').setup({
 	-- Best theme world
-	use("rebelot/kanagawa.nvim")
+	"rebelot/kanagawa.nvim",
 
-	use({ "nvim-lualine/lualine.nvim", requires = { "nvim-tree/nvim-web-devicons" } })
+	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 	-- Telescope
-	use({ "nvim-telescope/telescope-ui-select.nvim" })
-	use({
+    "nvim-telescope/telescope-ui-select.nvim",
+	{
 		"nvim-telescope/telescope.nvim",
-		requires = {
+		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "BurntSushi/ripgrep" },
 		},
-	})
+	},
 
 	-- Treesitter
-	use({
+	{
 		"nvim-treesitter/nvim-treesitter",
-		requires = {
+		dependencies = {
 			"p00f/nvim-ts-rainbow",
 			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
-		run = ":TSUpdate",
-	})
-	use("nvim-treesitter/nvim-treesitter-context")
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+		build = ":TSUpdate",
+	},
+	"nvim-treesitter/nvim-treesitter-context",
+	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 
 	-- LSP
-	use("neovim/nvim-lspconfig")
-	use("j-hui/fidget.nvim")
-	use("simrat39/rust-tools.nvim")
+	"neovim/nvim-lspconfig",
+	"j-hui/fidget.nvim",
+	"simrat39/rust-tools.nvim",
 	-- CMP
-	use({
+	{
 		"hrsh7th/nvim-cmp",
-		requires = {
+		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-buffer",
@@ -63,13 +56,13 @@ return packer.startup(function(use)
 			"f3fora/cmp-spell",
 		},
 		config = get_config("cmp"),
-	})
-	use("windwp/nvim-autopairs")
+	},
+	"windwp/nvim-autopairs",
 
 	--Tests
-	use({
+	{
 		"nvim-neotest/neotest",
-		requires = {
+		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
@@ -77,69 +70,56 @@ return packer.startup(function(use)
 			"rouge8/neotest-rust",
 			"haydenmeade/neotest-jest",
 		},
-	})
+	},
 
 	-- Debugging
-	use("mfussenegger/nvim-dap")
-	use("nvim-telescope/telescope-dap.nvim")
-	use("theHamsta/nvim-dap-virtual-text")
-	use("rcarriga/nvim-dap-ui")
-	use("mfussenegger/nvim-dap-python")
+	"mfussenegger/nvim-dap",
+	"nvim-telescope/telescope-dap.nvim",
+	"theHamsta/nvim-dap-virtual-text",
+	"rcarriga/nvim-dap-ui",
+	"mfussenegger/nvim-dap-python",
 
 	-- formatter
-	use("sbdchd/neoformat")
+	"sbdchd/neoformat",
 
 	-- useful
-	use("ThePrimeagen/harpoon")
-	use("mbbill/undotree")
-	use({
-		"lewis6991/gitsigns.nvim",
+	"ThePrimeagen/harpoon",
+	"mbbill/undotree",
+	{ "lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup()
 		end,
-	})
-	use("terrortylor/nvim-comment")
-	use("iamcco/markdown-preview.nvim")
+	},
+	"terrortylor/nvim-comment",
+	"iamcco/markdown-preview.nvim",
 
-	use("lukas-reineke/indent-blankline.nvim")
-	use({
-		"kosayoda/nvim-lightbulb",
-		requires = "antoinemadec/FixCursorHold.nvim",
-	})
-	use({
+	"lukas-reineke/indent-blankline.nvim",
+	{ "kosayoda/nvim-lightbulb",
+		dependencies = "antoinemadec/FixCursorHold.nvim",
+	},
+	{
 		"folke/zen-mode.nvim",
 		config = function()
-			require("zen-mode").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			require("zen-mode").setup({ })
 		end,
-	})
+	},
 	-- Tpope
-	use("tpope/vim-dadbod")
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rhubarb")
-	use("tpope/vim-surround")
+	"tpope/vim-dadbod",
+	"tpope/vim-fugitive",
+	"tpope/vim-rhubarb",
+	"tpope/vim-surround",
 
 	-- lua dev
-	use("folke/neodev.nvim")
-	use("h-hg/fcitx.nvim")
-
-	use({
-		"sourcegraph/sg.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-		cmd = { "cargo", "build", "--workspace" },
-	})
-	-- use({
-	--   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-	--   config = function()
-	--     require("lsp_lines").setup()
-	--   end,
-	-- })
-	use("uga-rosa/ccc.nvim")
-	use("stevearc/oil.nvim")
-	use("jose-elias-alvarez/null-ls.nvim")
-	use("cmp-nvim-lsp-signature-help")
-	use("folke/trouble.nvim")
-end)
+	"folke/neodev.nvim",
+	"h-hg/fcitx.nvim",
+	--
+	-- {
+	-- 	"sourcegraph/sg.nvim",
+	-- 	dependencies = { "nvim-lua/plenary.nvim" },
+	-- 	cmd = { "cargo", "build", "--workspace" },
+	-- },
+	"uga-rosa/ccc.nvim",
+	"stevearc/oil.nvim",
+	"jose-elias-alvarez/null-ls.nvim",
+	"folke/trouble.nvim",
+})
