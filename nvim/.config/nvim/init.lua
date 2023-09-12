@@ -121,6 +121,7 @@ require('lazy').setup({
 	-- Tpope
 	"tpope/vim-dadbod",
     "kristijanhusak/vim-dadbod-ui",
+    "kristijanhusak/vim-dadbod-completion",
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 	"tpope/vim-surround",
