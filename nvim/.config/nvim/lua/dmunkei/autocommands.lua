@@ -58,4 +58,4 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --     command = 'source <afile>',
 -- })
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]
+--vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]

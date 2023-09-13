@@ -1,33 +1,64 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+-- Load `./lua/options.lua`
+require("options")
+
+-- Load `./lua/keymaps.lua`
+require("keymaps")
+
+-- Load `./lua/autocmds.lua`
+require("autocmds")
+--
+-- Load `./lua/usercmds.lua`
+require("usercmds")
+
+-- Default installation path for lazy -- this will resolve to `~/.local/share/nvim`.
+-- See `:help stdpath()`
+local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+local lazy_setup = function()
+	-- Add lazy to neovim's runtime path, this is where neovim looks for files and shit
+	-- See `:help rtp`
+	vim.opt.runtimepath:prepend(lazy_path)
+
+	-- Read about these options in `:help lazy.nvim-lazy.nvim-configuration` or here:
+	-- <https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration>
+	--
+	-- The first argument (vvvvvvv) tells lazy where to look for plugin configs, and it's relative to
+	-- `./lua`
+	require("lazy").setup("plugins", {
+		defaults = {
+			-- Disable lazy loading by default so it doesn't fuck anything up
+			lazy = false,
+		},
+
+		install = {
+			-- Install missing plugins automatically
+			missing = true,
+		},
+
+		ui = {
+			-- Cool border for lazy floaty window yes
+			border = "solid",
+		},
+	})
 end
-vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-	-- Best theme world
-	"rebelot/kanagawa.nvim",
-})
+-- Is lazy already installed?
+local lazy_installed = vim.loop.fs_stat(lazy_path)
 
-	--
-	-- { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-	-- -- Telescope
-	--     "nvim-telescope/telescope-ui-select.nvim",
-	-- {
-	-- 	"nvim-telescope/telescope.nvim",
-	-- 	dependencies = {
-	-- 		{ "nvim-lua/plenary.nvim" },
-	-- 		{ "BurntSushi/ripgrep" },
-	-- 	},
-	-- },
-	--
+if lazy_installed then
+	lazy_setup()
+else
+	-- Clone lazy into `lazy_path`
+	vim.fn.system({
+		"git", "clone", "--branch=stable",
+		"https://github.com/folke/lazy.nvim",
+		lazy_path,
+	})
+
+	vim.notify("Installed lazy.nvim")
+	lazy_setup()
+end
+
 	-- -- Treesitter
 	-- {
 	-- 	"nvim-treesitter/nvim-treesitter",
@@ -45,25 +76,6 @@ require('lazy').setup({
 	-- "neovim/nvim-lspconfig",
 	-- "j-hui/fidget.nvim",
 	-- "simrat39/rust-tools.nvim",
-	-- -- CMP
-	-- {
-	-- 	"hrsh7th/nvim-cmp",
-	-- 	dependencies = {
-	-- 		"hrsh7th/cmp-nvim-lsp",
-	-- 		"hrsh7th/cmp-nvim-lua",
-	-- 		"hrsh7th/cmp-buffer",
-	-- 		"hrsh7th/cmp-path",
-	-- 		"hrsh7th/cmp-cmdline",
-	-- 		"hrsh7th/cmp-omni",
-	-- 		"hrsh7th/cmp-calc",
-	-- 		"hrsh7th/cmp-emoji",
-	-- 		"L3MON4D3/LuaSnip",
-	-- 		"saadparwaiz1/cmp_luasnip",
-	-- 		"rafamadriz/friendly-snippets",
-	-- 		"f3fora/cmp-spell",
-	-- 	},
-	-- 	config = get_config("cmp"),
-	-- },
 	-- "windwp/nvim-autopairs",
 	--
 	-- --Tests
@@ -128,6 +140,6 @@ require('lazy').setup({
 	-- -- 	cmd = { "cargo", "build", "--workspace" },
 	-- -- },
 	-- "uga-rosa/ccc.nvim",
+    -- "folke/trouble.nvim",
+    -- "jose-elias-alvarez/null-ls.nvim",
 	-- "stevearc/oil.nvim",
-	-- "jose-elias-alvarez/null-ls.nvim",
-	-- "folke/trouble.nvim",

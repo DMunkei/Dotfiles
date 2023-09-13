@@ -1,7 +1,3 @@
-if vim.fn.exists(":Reload") == 0 then
-    vim.cmd([[command Reload :so $HOME/.config/nvim/init.lua]])
-end
-
 vim.api.nvim_create_user_command("Xcolor", function()
   local Task = require("plenary.job")
   Task:new({

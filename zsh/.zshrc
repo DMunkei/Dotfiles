@@ -91,7 +91,7 @@ alias sbrc="source ~/.bashrc"
 alias alac="nvim ~/.config/alacritty/alacritty.yml"
 alias cdnv="cd ~/.config/nvim/"
 alias n="nvim ."
-alias vim='nvim'
+alias vim="nvim ."
 
 alias act="source ./venv/bin/activate"
 alias dev="cd ~/Development/"
