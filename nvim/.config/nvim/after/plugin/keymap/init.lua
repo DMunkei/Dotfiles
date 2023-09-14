@@ -20,6 +20,8 @@ vim.keymap.set("n", "<leader>F", ":Neoformat<CR>")
 
 -- Toggle nolist
 vim.keymap.set("n", "<F8>", ":set nolist!<CR>")
+vim.keymap.set("n", "<F7>", function () require('lsp-inlayhints').toggle() end)
+vim.keymap.set("n", "<F10>", "<cmd>IndentBlanklineToggle<CR>")
 
 -- Center page when scrolling
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
