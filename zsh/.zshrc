@@ -91,7 +91,7 @@ alias sbrc="source ~/.bashrc"
 alias alac="nvim ~/.config/alacritty/alacritty.yml"
 alias cdnv="cd ~/.config/nvim/"
 alias n="nvim ."
-alias vim="nvim ."
+alias vim="nvim"
 
 alias act="source ./venv/bin/activate"
 alias dev="cd ~/Development/"
@@ -143,3 +143,7 @@ export GTK_IM_MODULE='fcitx'
 export QT_IM_MODULE='fcitx'
 export SDL_IM_MODULE='fcitx'
 export XMODIFIERS='@im=fcitx'
+
+
+
+alias ship_it="git push"
