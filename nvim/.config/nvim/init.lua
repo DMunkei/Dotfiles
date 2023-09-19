@@ -73,7 +73,6 @@ end
 	-- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	--
 	-- -- LSP
-	-- "neovim/nvim-lspconfig",
 	-- "j-hui/fidget.nvim",
 	-- "simrat39/rust-tools.nvim",
 	-- "windwp/nvim-autopairs",
@@ -101,17 +100,6 @@ end
 	-- -- formatter
 	-- "sbdchd/neoformat",
 	--
-	-- -- useful
-	-- "ThePrimeagen/harpoon",
-	-- "mbbill/undotree",
-	-- { "lewis6991/gitsigns.nvim",
-	-- 	config = function()
-	-- 		require("gitsigns").setup()
-	-- 	end,
-	-- },
-	-- "terrortylor/nvim-comment",
-	-- "iamcco/markdown-preview.nvim",
-	--
 	-- "lukas-reineke/indent-blankline.nvim",
 	-- { "kosayoda/nvim-lightbulb",
 	-- 	dependencies = "antoinemadec/FixCursorHold.nvim",
@@ -122,13 +110,7 @@ end
 	-- 		require("zen-mode").setup({ })
 	-- 	end,
 	-- },
-	-- -- Tpope
-	-- "tpope/vim-dadbod",
-	--     "kristijanhusak/vim-dadbod-ui",
-	--     "kristijanhusak/vim-dadbod-completion",
-	-- "tpope/vim-fugitive",
-	-- "tpope/vim-rhubarb",
-	-- "tpope/vim-surround",
+    -- "tpope/vim-rhubarb",
 	--
 	-- -- lua dev
 	-- "folke/neodev.nvim",
@@ -139,7 +121,3 @@ end
 	-- -- 	dependencies = { "nvim-lua/plenary.nvim" },
 	-- -- 	cmd = { "cargo", "build", "--workspace" },
 	-- -- },
-	-- "uga-rosa/ccc.nvim",
-    -- "folke/trouble.nvim",
-    -- "jose-elias-alvarez/null-ls.nvim",
-	-- "stevearc/oil.nvim",
