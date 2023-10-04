@@ -1,7 +1,34 @@
 return {
+
 	"neovim/nvim-lspconfig",
 
 	config = function()
+        require("neodev").setup({ })
+
+        vim.diagnostic.config({
+            update_in_insert = false,
+            float = {
+                border = "single",
+                style = "minimal"
+            }
+        })
+
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover, {
+            border = "single",
+            style = "minimal",
+            title = "Knowledge Bitch"
+        })
+        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help, {
+            border = "single",
+            style = "minimal"
+        }
+        )
+
+        require("lspconfig.ui.windows").default_options = {
+            border = "single",
+        }
 		local lspconfig = require("lspconfig")
 
 		lspconfig.tsserver.setup({

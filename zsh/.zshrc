@@ -130,7 +130,7 @@ alias aoc='cd ~/Development/AOC/aoc2022/rustacean'
 #TMUX
 alias oletdev='~/.config/tmux/olet-dev-shell.sh'
 alias ostdev='~/.config/tmux/ost-dev-shell.sh'
-alias zewdev='~/.config/tmux/zew-dev-shell.sh'
+alias zdv='~/.config/tmux/zew-dev-shell.sh'
 
 alias ta='tmux attach-session'
 alias tks='tmux kill-session'

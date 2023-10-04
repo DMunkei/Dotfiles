@@ -55,7 +55,7 @@ vim.keymap.set({"n", "v"}, "<leader>y", "\"+y")
 vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
 
 --rename under cursor
-vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
 vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
