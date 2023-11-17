@@ -1,14 +1,15 @@
 return {
 	"lukas-reineke/indent-blankline.nvim",
-
+    main = "ibl",
 	config = function()
-		require("indent_blankline").setup({
-			space_char_blankline = " ",
-			show_current_context = true,
-			show_current_context_start = true,
-			disable_with_nolist = true,
-		})
-		vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
-		vim.cmd([[highlight IndentBlanklineContextStart guisp=#FF0000 gui=underline]])
+        require("ibl").setup({
+            enabled = false,
+            debounce = 100,
+            -- indent = { char = "|" },
+            whitespace = { highlight = { "Whitespace", "NonText" } },
+            scope = { exclude = { language = { "lua" } } },
+        })
+		-- vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
+		-- vim.cmd([[highlight IndentBlanklineContextStart guisp=#FF0000 gui=underline]])
 	end,
 }

@@ -16,6 +16,27 @@ return {
                     -- the default case_mode is "smart_case"
                 }
 			},
+            file_ignore_patterns = {
+                "^node_modules/",
+                "^dist/",
+                "^.git/",
+                "^.direnv/",
+                "^.sqlx/",
+                "^zsh/plugins/",
+                "^desktop/icons/",
+                "%.png",
+                "%.jpg",
+                "%.jpeg",
+                "%.svg",
+                "%.ttf",
+                "%.otf",
+                "%.lock",
+                "%-lock.json",
+                "%.wasm",
+                "%.xml",
+                "%.css",
+                "%.tmTheme",
+            },
 			defaults = {
 				preview = {
 					treesitter = {

@@ -1,26 +1,32 @@
 return {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = {"BufReadPre", "BufNewFile"},
 	dependencies = {
  		"p00f/nvim-ts-rainbow",
  		"nvim-treesitter/nvim-treesitter-context",
  		"nvim-treesitter/nvim-treesitter-textobjects",
  	},
-
     config = function()
-        require'nvim-treesitter.configs'.setup {
+        local treesitter = require("nvim-treesitter.configs")
+        treesitter.setup ({
+            highlight = { enable = true },
+            indent = { enable = true },
             ensure_installed = {
                 "python",
                 "javascript",
                 "markdown",
                 "html",
+                "yaml",
                 "json",
                 "lua",
                 "css",
                 "bash",
+                "sql",
+                "vim",
             },
             enabled = false,
             sync_install = false,
-            highlight = { enable = true },
             playground = { enable=true },
             textobjects = {
                 incremental_selection = {
@@ -66,6 +72,6 @@ return {
                     },
                 }
             }
-        }
+        })
          end,
 }

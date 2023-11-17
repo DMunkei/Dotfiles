@@ -1,5 +1,5 @@
-vim.keymap.set("n", "_","zD")
-vim.keymap.set("v", "_", "<CMD>:fold<CR>")
+-- vim.keymap.set("n", "_","zD")
+-- vim.keymap.set("v", "_", "<CMD>:fold<CR>")
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
 
 -- Remapping escape to something in the homerow
@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>F", ":Neoformat<CR>")
 -- Toggle nolist
 vim.keymap.set("n", "<F8>", ":set nolist!<CR>")
 vim.keymap.set("n", "<F7>", function () require('lsp-inlayhints').toggle() end)
-vim.keymap.set("n", "<F10>", "<cmd>IndentBlanklineToggle<CR>")
+vim.keymap.set("n", "<F6>", "<cmd>IBLToggle<CR>")
 
 -- Center page when scrolling
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -60,4 +60,5 @@ vim.keymap.set("n", "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>q', '<c-w>q')

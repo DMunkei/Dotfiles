@@ -37,21 +37,21 @@ colors:
     - { index: 17, color: '0xff5d62' }
 
 font:
-  normal:
-    family: "Iosevka Term"
-    style: Regular
-
-  bold:
-    family: "Iosevka Term"
-    style: Bold
-
-  italic:
-    family: "Iosevka Term"
-    style: Italic
-
-  bold_italic:
-    family: "Iosevka Term"
-    style: Bold Italic
+  # normal:
+  #   family: "Iosevka Term"
+  #   style: Regular
+  #
+  # bold:
+  #   family: "Iosevka Term"
+  #   style: Bold
+  #
+  # italic:
+  #   family: "Iosevka Term"
+  #   style: Italic
+  #
+  # bold_italic:
+  #   family: "Iosevka Term"
+  #   style: Bold Italic
 # hack nerd
   # normal:
   #   family: Hack Nerd Font
@@ -70,21 +70,21 @@ font:
   #   style: Bold Italic
 
 #JetbrainsMono
-  # normal:
-  #   family: JetbrainsMono Nerd Font
-  #   style: Regular
-  #
-  # bold:
-  #   family: JetbrainsMono Nerd Font
-  #   style: Bold
-  #
-  # italic:
-  #   family: JetbrainsMono Nerd Font
-  #   style: Italic
-  #
-  # bold_italic:
-  #   family: JetbrainsMono Nerd Font
-  #   style: Bold Italic
+  normal:
+    family: JetbrainsMono Nerd Font
+    style: Regular
+  
+  bold:
+    family: JetbrainsMono Nerd Font
+    style: Bold
+  
+  italic:
+    family: JetbrainsMono Nerd Font
+    style: Italic
+  
+  bold_italic:
+    family: JetbrainsMono Nerd Font
+    style: Bold Italic
 
   size: 13
   offset:

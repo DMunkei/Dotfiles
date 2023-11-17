@@ -29,11 +29,47 @@ return {
         require("lspconfig.ui.windows").default_options = {
             border = "single",
         }
+
 		local lspconfig = require("lspconfig")
+
+        local function diagnostics_handler(err, result, ctx)
+            if err ~= nil then
+                error("Failed to request diagnostics: " .. vim.inspect(err))
+            end
+
+            if result == nil then
+                return
+            end
+
+            local buffer = vim.uri_to_bufnr(result.uri)
+            local namespace = vim.lsp.diagnostic.get_namespace(ctx.client_id)
+
+            local diagnostics = vim.tbl_map(function(diagnostic)
+                local resultLines = vim.split(diagnostic.message, '\n')
+                local output = vim.fn.reverse(resultLines)
+                return {
+                    bufnr = buffer,
+                    lnum = diagnostic.range.start.line,
+                    end_lnum = diagnostic.range["end"].line,
+                    col = diagnostic.range.start.character,
+                    end_col = diagnostic.range["end"].character,
+                    severity = diagnostic.severity,
+                    message = table.concat(output, "\n\n"),
+                    source = diagnostic.source,
+                    code = diagnostic.code,
+                }
+            end, result.diagnostics)
+
+            vim.diagnostic.set(namespace, buffer, diagnostics)
+        end
+
 
 		lspconfig.tsserver.setup({
 			settings = {
 				typescript = {
+                    handlers = {
+                        ["textDocument/publishDiagnostics"] = diagnostics_handler
+                    },
 					inlayHints = {
 						includeInlayParameterNameHints = "all",
 						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -50,7 +86,7 @@ return {
 						includeInlayParameterNameHints = "all",
 						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
 						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
+						includeInlayVariableTypeHints = false,
 						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
 						includeInlayPropertyDeclarationTypeHints = true,
 						includeInlayFunctionLikeReturnTypeHints = true,
@@ -59,6 +95,7 @@ return {
 				},
 			},
 		})
+
 		lspconfig.lua_ls.setup({
 			settings = {
 				Lua = {
@@ -72,9 +109,20 @@ return {
 				},
 			},
 		})
+        lspconfig.volar.setup( { filetypes = {'typescript', 'javascript', 'typescript', 'vue', 'json'}, })
         lspconfig.pyright.setup({})
         lspconfig.jedi_language_server.setup({})
-
+        lspconfig.clangd.setup({})
+        lspconfig.emmet_ls.setup({
+                filetypes = {
+                    "css",
+                    "html",
+                    "less",
+                    "sass",
+                    "scss",
+                    "htmldjango",
+                },
+            })
 		-- Another cool thing is `:help LspAttach`
 		--   (this is an autocommand, see `:help autocmd` and `:help nvim_create_autocmd`)
 		--
