@@ -19,6 +19,7 @@ return {
             style = "minimal",
             title = "Knowledge Bitch"
         })
+
         vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
         vim.lsp.handlers.signature_help, {
             border = "single",
@@ -63,13 +64,12 @@ return {
             vim.diagnostic.set(namespace, buffer, diagnostics)
         end
 
-
 		lspconfig.tsserver.setup({
+            handlers = {
+                ["textDocument/publishDiagnostics"] = diagnostics_handler
+            },
 			settings = {
 				typescript = {
-                    handlers = {
-                        ["textDocument/publishDiagnostics"] = diagnostics_handler
-                    },
 					inlayHints = {
 						includeInlayParameterNameHints = "all",
 						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -109,7 +109,12 @@ return {
 				},
 			},
 		})
-        lspconfig.volar.setup( { filetypes = {'typescript', 'javascript', 'typescript', 'vue', 'json'}, })
+
+        lspconfig.volar.setup( {
+            handlers = {
+                ["textDocument/publishDiagnostics"] = diagnostics_handler
+            },
+            filetypes = {'typescript', 'javascript', 'typescript', 'vue', 'json'}, })
         lspconfig.pyright.setup({})
         lspconfig.jedi_language_server.setup({})
         lspconfig.clangd.setup({})
