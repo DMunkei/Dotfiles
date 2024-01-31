@@ -48,14 +48,13 @@ vim.keymap.set("n", "<leader>x", "<C-w>q")
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", "\"_dP")
-
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({"n", "v"}, "<leader>y", "\"+y")
-
 vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
 
 --rename under cursor
 vim.keymap.set("n", "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+-- vim.keymap.set("n", "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left><C-f>")
 
 vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)

@@ -1,7 +1,7 @@
 session="ZEW"
 devenvironment='zew&&act'
 # devUrls='vivaldi-stable Space http://127.0.0.1:8000/admin Space http://127.0.0.1:8000/timetracker'
-cd ~/Development/berlin_timetracker_2023/ || exit
+cd ~/Development/zew_arbeitswelt_2023/ || exit
 tmux new-session -d -s $session
 
 window=0

@@ -88,16 +88,16 @@ alias szrc="source ~/.zshrc"
 alias sbrc="source ~/.bashrc"
 
 
-alias alac="nvim ~/.config/alacritty/alacritty.yml"
+alias alac="nvim ~/.config/alacritty/alacritty.toml"
 alias cdnv="cd ~/.config/nvim/"
 alias n="nvim ."
 alias vim="nvim"
 
 alias act="source ./venv/bin/activate"
 alias dev="cd ~/Development/"
-alias odev="cd ~/Development/olet/"
+alias odev="cd ~/Development/oletv2/"
 alias ost="cd ~/Development/ostip_django/"
-alias zew="cd ~/Development/berlin_timetracker_2023/"
+alias zew="cd ~/Development/zew_arbeitswelt_2023/"
 
 alias pms="python manage.py shell"
 alias pmr="python manage.py runserver"
@@ -129,7 +129,7 @@ alias leetcode='cd ~/Development/leetcode/'
 alias aoc='cd ~/Development/AOC/aoc2022/rustacean'
 
 #TMUX
-alias oletdev='~/.config/tmux/olet-dev-shell.sh'
+alias odv='~/.config/tmux/olet-dev-shell.sh'
 alias ostdev='~/.config/tmux/ost-dev-shell.sh'
 alias zdv='~/.config/tmux/zew-dev-shell.sh'
 
@@ -139,12 +139,11 @@ alias tks='tmux kill-session'
 export LC_ALL=en_US.utf8
 export PATH=$PATH:/opt/pycharm-2020.2.3/bin/
 export PATH=$PATH:~/.scripts/
+export PATH=$PATH:~/go/bin/
 
 export GTK_IM_MODULE='fcitx'
 export QT_IM_MODULE='fcitx'
 export SDL_IM_MODULE='fcitx'
 export XMODIFIERS='@im=fcitx'
-
-
 
 alias ship_it="git push"

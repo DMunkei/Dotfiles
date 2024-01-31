@@ -8,6 +8,7 @@ vim.opt.fillchars:append({
     vertright = '┣',
     verthoriz = '╋',
 })
+--
 -- Default options:
 return {
 	"rebelot/kanagawa.nvim",
