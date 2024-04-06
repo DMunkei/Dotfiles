@@ -1,6 +1,5 @@
 # TODO: Aha I see I need to put the :
 
-
 def bla():
     okay = 1
     if okay == 1:

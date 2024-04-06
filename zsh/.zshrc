@@ -42,7 +42,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     fzf-tab
-    zsh-z
+    # zsh-z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -147,3 +147,5 @@ export SDL_IM_MODULE='fcitx'
 export XMODIFIERS='@im=fcitx'
 
 alias ship_it="git push"
+alias man=batman
+eval "$(zoxide init zsh)"

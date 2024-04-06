@@ -82,6 +82,6 @@ vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning"
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 vim.cmd [[sign define DiagnosticSignError text=󰅙 texthl=DiagnosticSignError linehl= numhl=]]
-vim.cmd [[sign define DiagnosticSignWarn text=󰋼  texthl=DiagnosticSignWarn linehl= numhl=]]
+vim.cmd [[sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=]]
 vim.cmd [[sign define DiagnosticSignInfo text=󰌵 texthl=DiagnosticSignInfo linehl= numhl=]]
-vim.cmd [[sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=]]
+vim.cmd [[sign define DiagnosticSignHint text=󰋼 texthl=DiagnosticSignHint linehl= numhl=]]

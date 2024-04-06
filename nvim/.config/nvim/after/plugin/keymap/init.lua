@@ -1,6 +1,5 @@
--- vim.keymap.set("n", "_","zD")
--- vim.keymap.set("v", "_", "<CMD>:fold<CR>")
-vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
+-- remap save
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
 
 -- Remapping escape to something in the homerow
 vim.keymap.set("i", "kj", "<esc>")
@@ -8,7 +7,6 @@ vim.keymap.set("i", "kj", "<esc>")
 
 -- vim.keymap.set("n", "<leader>e", ":Ex<CR>")
 vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Open parent directory" })
-vim.keymap.set("n", "<leader>u", ":UndotreeShow<CR>")
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

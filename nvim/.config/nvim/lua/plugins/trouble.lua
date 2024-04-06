@@ -1,6 +1,7 @@
 return {
      "folke/trouble.nvim",
      config = true,
+    vim.keymap.set('n', '<leader>tt', '<cmd>TroubleToggle<CR>', { desc = 'Open Trouble' }),
     vim.keymap.set("n", "<leader>xx", function() require("trouble").open() end),
     vim.keymap.set("n", "<leader>xw", function() require("trouble").open("workspace_diagnostics") end),
     vim.keymap.set("n", "<leader>xd", function() require("trouble").open("document_diagnostics") end),
