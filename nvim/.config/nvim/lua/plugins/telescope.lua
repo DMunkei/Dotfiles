@@ -1,18 +1,12 @@
 return {
     "nvim-telescope/telescope.nvim",
-
+  event = 'VimEnter',
+  branch = '0.1.x',
     dependencies = {
         "nvim-lua/plenary.nvim",
         "BurntSushi/ripgrep",
-        {
-            "nvim-telescope/telescope-live-grep-args.nvim",
-            -- This will not install any breaking changes.
-            -- For major updates, this must be adjusted manually.
-            version = "^1.0.0",
-        }
     },
     config = function()
-        local lga_actions = require("telescope-live-grep-args.actions")
         require("telescope").setup {
             extensions = {
                 ["ui-select"] = {
@@ -27,10 +21,6 @@ return {
                 }
             },
             mappings = { -- extend mappings
-                i = {
-                    ["<C-k>"] = lga_actions.quote_prompt(),
-                    ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-                },
             },
             file_ignore_patterns = {
                 "^node_modules/",
@@ -66,31 +56,39 @@ return {
         }
         require("telescope").load_extension("ui-select")
         require("telescope").load_extension("fzf")
-        require("telescope").load_extension("live_grep_args")
 
-        vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles,
+        local builtin = require 'telescope.builtin'
+        vim.keymap.set('n', "<leader>ft", "<CMD>TodoTelescope<cr>", {desc = "FindTodos"})
+        vim.keymap.set('n', '<leader>?', builtin.oldfiles,
             { desc = '[?] Find recently opened files' })
-        vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers,
+        vim.keymap.set('n', '<leader><space>', builtin.buffers,
             { desc = '[ ] Find existing buffers' })
         vim.keymap.set('n', '<leader>/', function()
             -- You can pass additional configuration to telescope to change theme, layout, etc.
-            require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+            builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
                 winblend = 10,
                 previewer = false,
             })
         end, { desc = '[/] Fuzzily search in current buffer' })
 
-        vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-        vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-        vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-        vim.keymap.set('n', '<leader>S',  require('telescope.builtin').live_grep, { desc = '[S]earch by Grep' })
+        vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+        vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+        vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+        vim.keymap.set('n', '<leader>s/',  builtin.live_grep, { desc = '[S]earch by Grep' })
         vim.keymap.set("n", "<leader>sg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
-        -- vim.keymap.set("n", "<leader>gc", require('telescope-live-grep-args.shortcuts').grep_word_under_cursor, {desc = "[G]rab [C]ursor"})
-        vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+        vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
         vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { desc = 'Type [D]efinition' })
-        vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols,
+        vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols,
             { desc = '[D]ocument [S]ymbols' })
-        -- vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+        -- vim.keymap.set('n', '<leader>ws', builtin.lsp_dynamic_workspace_symbols,
         --     { desc = '[W]orkspace [S]ymbols' })
+    --     -- Slightly advanced example of overriding default behavior and theme
+      vim.keymap.set('n', '<leader>f', function()
+        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+          winblend = 10,
+          previewer = false,
+        })
+      end, { desc = '[/] Fuzzily search in current buffer' })
     end,
 }

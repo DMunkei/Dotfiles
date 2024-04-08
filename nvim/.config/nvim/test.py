@@ -1,5 +1,3 @@
-# TODO: Aha I see I need to put the :
-
 def bla():
     okay = 1
     if okay == 1:
@@ -7,6 +5,7 @@ def bla():
 
 
 def foo():
+    bla()
     letBanaBeCoolaBeCool = "wassup"
     if letBanaBeCoolaBeCool:
         b = "wassup"

@@ -1,3 +1,5 @@
+-- Clear highlight
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- remap save
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
 
