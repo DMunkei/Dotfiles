@@ -1,0 +1,48 @@
+## name: Kanagawa-Light
+## license: MIT
+## author: Matthias Vallentin
+env:
+  TERM; xterm-256color
+
+window.opacity: 1.0
+colors:
+  primary:
+  background: 'f2eccd'
+  foreground: '3b3b4c'
+
+
+selection_background #c8cfd9
+selection_foreground #16161D
+url_color #72A7BC
+cursor #16161D
+
+# Tabs
+active_tab_background #c8cfd9
+active_tab_foreground #3b3b4c
+inactive_tab_background #b3bac4
+inactive_tab_foreground #727169
+#tab_bar_background #15161E
+
+# normal
+color0 #090618
+color1 #C34043
+color2 #76946A
+color3 #69542e
+color4 #284683
+color5 #493764
+color6 #4a6860
+color7 #16161D
+
+# bright
+color8  #727169
+color9  #aa1212
+color10 #4d652f
+color11 #725217
+color12 #295364
+color13 #938AA9
+color14 #5d5573
+color15 #3b3b4c
+
+# extended colors
+color16 #FFA066
+color17 #FF5D62
