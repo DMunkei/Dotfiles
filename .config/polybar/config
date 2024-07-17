@@ -17,11 +17,12 @@
 ;==========================================================
 
 [colors]
-background = #282A2E
+background = #bf282A2E
 background-alt = #373B41
-foreground = #C5C8C6
-primary = #F0C674
-secondary = #8ABEB7
+foreground = #ff5f1c
+
+primary = #1eabfc
+secondary = #fff
 alert = #A54242
 disabled = #707880
 
@@ -29,6 +30,7 @@ disabled = #707880
 width = 100%
 height = 24pt
 radius = 0
+monitor = HDMI-1
 ; offset-y = 1
 
 ; dpi = 96
@@ -42,7 +44,7 @@ border-size = 4pt
 border-color = #00000000
 
 padding-left = 0
-padding-right = 1
+padding-right = 4
 
 module-margin = 1
 
@@ -51,19 +53,13 @@ separator-foreground = ${colors.disabled}
 
 font-0 = JetBrains Mono Nerd Font;2
 
-modules-left = xworkspaces ; xwindow
-modules-right = filesystem pulseaudio xkeyboard memory cpu wlan eth date 
+modules-left = xworkspaces ; xwindow spotify
+modules-right = filesystem pulseaudio  memory cpu wlan date battery
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
 enable-ipc = true
-
-; wm-restack = generic
-; wm-restack = bspwm
-; wm-restack = i3
-
-; override-redirect = true
 
 [module/systray]
 type = internal/tray
@@ -102,7 +98,7 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#F0C674}%mountpoint%%{F-} %percentage_used%%
+label-mounted = %{F#1eabfc}%mountpoint%%{F-} %percentage_used%%
 
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.disabled}
@@ -150,17 +146,48 @@ type = internal/network
 interval = 5
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
-label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
+label-disconnected = %{F#1eabfc}%ifname%%{F#707880} disconnected
 
 [module/wlan]
 inherit = network-base
 interface-type = wireless
-label-connected = %{F#F0C674}%ifname%%{F-} %essid% %local_ip%
+label-connected = %{F#1eabfc}%ifname%%{F-} %essid% %local_ip%
 
 [module/eth]
 inherit = network-base
 interface-type = wired
 label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
+
+[module/battery]
+type = internal/battery
+full-at = 99
+batter = BAT0
+adapter = ADP1
+poll-interval = 5
+format-charging = %{F#1eabfc}<animation-charging> %{F-} <label-charging>
+label-charging = Charging %percentage%% %time%
+label-discharging = %{F#1eabfc}Discharging%{F-} %percentage%% %time%
+label-full = Fully charged
+
+time-format = %H:%M
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+; Only applies if <animation-discharging> is used
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
+
 
 [module/date]
 type = internal/date
@@ -179,7 +206,17 @@ label-foreground = ${colors.primary}
 ; tail = true
 ; interval = 0
 ; format-prefix = "KBD"
-
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python ~/dotfiles/.config/polybar/spotify_status.py -f '{artist}: {song}'
+format-underline = ${colors.primary}
+;control players (optional)
+click-left = playerctl --player=spotify play-pause
+click-right = playerctl --player=spotify next
+click-middle = playerctl --player=spotify previous
 
 ; [module/spotify]
 ; type = custom/script

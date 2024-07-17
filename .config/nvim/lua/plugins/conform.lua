@@ -1,16 +1,25 @@
 return {
 	"stevearc/conform.nvim",
-	opts = {},
 	config = function()
-		require("conform").setup({
+		local conform = require("conform")
+		conform.setup({
+			log_level = vim.log.levels.DEBUG,
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- Conform will run multiple formatters sequentially
-				go = { "goimports", "gofmt" },
-				-- Use a sub-list to run only the first available formatter
-				javascript = { { "prettierd", "prettier" } },
-				vue = { { "prettierd", "prettier" } },
+				python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
 			},
+			format_on_save = {
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 500,
+			},
+			vim.keymap.set({ "v", "n" }, "<leader>l", function()
+				conform.format({
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 500,
+				})
+			end),
 		})
 	end,
 }

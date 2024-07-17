@@ -30,6 +30,11 @@ local lazy_setup = function()
 			-- Disable lazy loading by default so it doesn't fuck anything up
 			lazy = false,
 		},
+		change_detection = {
+			-- automatically check for config file changes and reload the ui
+			enabled = true,
+			notify = false, -- get a notification when changes are found
+		},
 
 		install = {
 			-- Install missing plugins automatically
@@ -51,7 +56,9 @@ if lazy_installed then
 else
 	-- Clone lazy into `lazy_path`
 	vim.fn.system({
-		"git", "clone", "--branch=stable",
+		"git",
+		"clone",
+		"--branch=stable",
 		"https://github.com/folke/lazy.nvim",
 		lazy_path,
 	})

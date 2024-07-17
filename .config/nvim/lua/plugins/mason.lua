@@ -1,28 +1,39 @@
 return {
-	{
-		"williamboman/mason.nvim",
-		config = function()
-			local mason = require("mason")
-			mason.setup({
-				ensure_installed = {
-					"tsserver",
-					"html",
-					"cssls",
-					"pyright",
-					"ruff_lsp",
-					"lua_ls",
-					"sqlls",
-					"bashls",
-					"volar",
-					"dockerls",
-					"clangd",
-					"docker_compose_language_service",
-					"marksman",
-					"gopls",
-					"emmet_ls",
-					"jedi_language_server",
-				},
-			})
-		end,
+	"williamboman/mason.nvim",
+	dependencies = {
+		"williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
+	config = function()
+		require("mason").setup()
+		require("mason-lspconfig").setup({
+			ensure_installed = {
+				"jsonls",
+				"bashls",
+				"emmet_ls",
+				"html",
+				"cssls",
+				-- "tsserver"
+				--PYTHON
+				"pyright",
+				"jedi_language_server",
+				-- "ruff_lsp",
+				"sqlls",
+				"dockerls",
+				"docker_compose_language_service",
+				-- "clangd",
+				"marksman",
+				"lua_ls",
+			},
+			automatic_installation = true,
+		})
+		require("mason-tool-installer").setup({
+			ensure_installed = {
+				"stylua",
+        "ruff",
+				-- "pylint",
+				"codespell",
+			},
+		})
+	end,
 }

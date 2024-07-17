@@ -40,9 +40,18 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(event)
-		require("conform").format({ async = true, lsp_fallback = true, bufnr = event.buf })
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	pattern = "*",
+-- 	callback = function(args)
+-- 		require("conform").format({ bufnr = args.buf })
+-- 	end,
+-- })
+--
+--
+local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+	group = lint_augroup,
+	callback = function()
+		require("lint").try_lint()
 	end,
 })

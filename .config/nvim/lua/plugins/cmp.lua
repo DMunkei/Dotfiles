@@ -15,7 +15,7 @@ return {
 		"hrsh7th/cmp-emoji",
 		"rafamadriz/friendly-snippets",
 		"f3fora/cmp-spell",
-    "onsails/lspkind.nvim"
+		"onsails/lspkind.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -28,6 +28,7 @@ return {
 				end,
 			},
 			formatting = {
+				expandable_indicator = true,
 				format = lspkind.cmp_format({
 					maxwidth = 50,
 					ellipsis_char = "...",
@@ -43,7 +44,7 @@ return {
 					select = true,
 				}),
 			}),
-      
+
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
@@ -62,6 +63,13 @@ return {
 
 		cmp.setup.filetype("gitcommit", {
 			sources = cmp.config.sources({ { name = "luasnip" }, { name = "cmp_git" } }, { { name = "buffer" } }),
+		})
+
+		cmp.setup.filetype({ "sql" }, {
+			sources = {
+				{ name = "vim-dadbod-completion" },
+				{ name = "buffer" },
+			},
 		})
 
 		cmp.setup.cmdline({ "/", "?" }, {

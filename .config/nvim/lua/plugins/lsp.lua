@@ -2,7 +2,6 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
@@ -61,39 +60,56 @@ return {
 
 		local builtin = require("telescope.builtin")
 		local lspconfig = require("lspconfig")
-
-		lspconfig.tsserver.setup({
-			root_dir = function(...)
-				return lspconfig.util.root_pattern(".git")(...)
-			end,
-			single_file_support = false,
-			settings = {
-				typescript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "literal",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = false,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-				javascript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-			},
-		})
-		lspconfig.bashls.setup({})
-		lspconfig.marksman.setup({})
+		--
+		-- local vue_ts_plugin = "/usr/lib/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin"
+		-- lspconfig.tsserver.setup({
+		-- 	init_options = {
+		-- 		plugins = {
+		-- 			{
+		-- 				name = "@vue/typescipt-plugin",
+		-- 				location = vue_ts_plugin,
+		-- 				languages = { "javascript", "typescript", "vue" },
+		-- 			},
+		-- 		},
+		-- 	},
+		-- 	filetypes = {
+		-- 		"javascript",
+		-- 		"javascriptreact",
+		-- 		"javascript.jsx",
+		-- 		"typescript",
+		-- 		"typescriptreact",
+		-- 		"typescript.tsx",
+		-- 		"vue",
+		-- 	},
+		-- 	root_dir = function(...)
+		-- 		return lspconfig.util.root_pattern(".git")(...)
+		-- 	end,
+		-- 	single_file_support = false,
+		-- 	settings = {
+		-- 		typescript = {
+		-- 			inlayHints = {
+		-- 				includeInlayParameterNameHints = "literal",
+		-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+		-- 				includeInlayFunctionParameterTypeHints = true,
+		-- 				includeInlayVariableTypeHints = false,
+		-- 				includeInlayPropertyDeclarationTypeHints = true,
+		-- 				includeInlayFunctionLikeReturnTypeHints = true,
+		-- 				includeInlayEnumMemberValueHints = true,
+		-- 			},
+		-- 		},
+		-- 		javascript = {
+		-- 			inlayHints = {
+		-- 				includeInlayParameterNameHints = "all",
+		-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+		-- 				includeInlayFunctionParameterTypeHints = true,
+		-- 				includeInlayVariableTypeHints = true,
+		-- 				includeInlayPropertyDeclarationTypeHints = true,
+		-- 				includeInlayFunctionLikeReturnTypeHints = true,
+		-- 				includeInlayEnumMemberValueHints = true,
+		-- 			},
+		-- 		},
+		-- 	},
+		-- })
 		lspconfig.lua_ls.setup({
 			settings = {
 				Lua = {
@@ -107,23 +123,46 @@ return {
 				},
 			},
 		})
-
-		lspconfig.volar.setup({
-			handlers = { ["textDocument/publishDiagnostics"] = diagnostics_handler },
-			filetypes = { "javascript", "typescript", "vue" },
-		})
-
-		-- Python
-		lspconfig.ruff_lsp.setup({})
-		lspconfig.pyright.setup({})
-		lspconfig.jedi_language_server.setup({})
-
-		lspconfig.clangd.setup({})
-
-		lspconfig.gopls.setup({})
-		lspconfig.dockerls.setup({})
-		lspconfig.docker_compose_language_service.setup({})
-		lspconfig.yamlls.setup({})
+		--
+		-- local util = require("lspconfig.util")
+		-- local function get_typescript_server_path(root_dir)
+		-- 	local global_ts = "/usr/lib/node_modules/typescript/lib/"
+		-- 	local found_ts = ""
+		-- 	local function check_dir(path)
+		-- 		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
+		-- 		if util.path.exists(found_ts) then
+		-- 			return path
+		-- 		end
+		-- 	end
+		-- 	if util.search_ancestors(root_dir, check_dir) then
+		-- 		return found_ts
+		-- 	else
+		-- 		return global_ts
+		-- 	end
+		-- end
+		--
+		-- lspconfig.volar.setup({
+		-- 	on_new_config = function(new_config, new_root_dir)
+		-- 		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+		-- 	end,
+		-- })
+		-- -- Python
+		-- lspconfig.ruff_lsp.setup({})
+		--
+		-- lspconfig.clangd.setup({})
+		-- lspconfig.yamlls.setup({})
+		for _, server in ipairs({
+			"dockerls",
+			"docker_compose_language_service",
+			"html",
+			"cssls",
+			"bashls",
+			"marksman",
+			"pyright",
+			"jedi_language_server",
+		}) do
+			lspconfig[server].setup({})
+		end
 		lspconfig.emmet_ls.setup({
 			filetypes = {
 				"css",
@@ -134,6 +173,9 @@ return {
 				"htmldjango",
 			},
 		})
+		-- lspconfig.gdscript.setup({
+		-- 	filetypes = { "gd", "gdscript", "gdscript3" },
+		-- })
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-on-attach", { clear = true }),
@@ -141,15 +183,12 @@ return {
 				local map = function(keys, func, desc)
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 				end
-				map("<leader>l", function()
-					require("conform").format({ async = true, lsp_fallback = true, bufnr = event.buf })
-				end, "Format buffer")
-				map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
+				map("gd", builtin.lsp_definitions, "[G]oto [D]ddefinition")
 				map("gr", builtin.lsp_references, "[G]oto [R]eferences")
 				map("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
-				map("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
-				map("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
-				map("<leader>Ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+				map("<leader>D", builtin.lsp_type_definitions, "Type [D]definition")
+				map("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]symbols")
+				map("<leader>Ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ssymbols")
 				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
