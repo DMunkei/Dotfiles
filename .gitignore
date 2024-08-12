@@ -1,1 +1,11 @@
-./privates
+privates
+dunst
+i3
+i3status
+nvim
+picom
+polybar
+rofi
+tmux
+alacritty
+alacritty.*
