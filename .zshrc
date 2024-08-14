@@ -2,7 +2,7 @@ fortune
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -36,8 +36,8 @@ plugins=(
     git
     history-substring-search
     colored-man-pages
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+    # zsh-autosuggestions
+    # zsh-syntax-highlighting
     fzf-tab
     # zsh-z
 )
@@ -147,3 +147,8 @@ export XMODIFIERS='@im=fcitx'
 alias ship_it="git push"
 alias man=batman
 eval "$(zoxide init zsh)"
+
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source /opt/homebrew/opt/spaceship/spaceship.zsh
