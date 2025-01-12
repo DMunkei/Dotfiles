@@ -1,5 +1,5 @@
 -- Clear highlight
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- remap save
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
 
@@ -7,8 +7,11 @@ vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
 vim.keymap.set("i", "kj", "<esc>")
 -- inoremap("<CR>", "<CR><ESC>zzi") Typewriter scrolling
 
--- vim.keymap.set("n", "<leader>e", ":Ex<CR>")
+-- vim.keymap.set("n", "<leaer>e", ":Ex<CR>")
 vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Open parent directory" })
+
+vim.keymap.set("n", "'", "<Cmd>norm gcc<CR>")
+vim.keymap.set("v", "'", "gc", { remap = true })
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -20,7 +23,9 @@ vim.keymap.set("n", "<leader>F", ":Neoformat<CR>")
 
 -- Toggle nolist
 vim.keymap.set("n", "<F8>", ":set nolist!<CR>")
-vim.keymap.set("n", "<F7>", function () require('lsp-inlayhints').toggle() end)
+vim.keymap.set("n", "<F7>", function()
+	require("lsp-inlayhints").toggle()
+end)
 vim.keymap.set("n", "<F6>", "<cmd>IBLToggle<CR>")
 
 -- Center page when scrolling
@@ -44,20 +49,19 @@ vim.keymap.set("n", "<M-l>", "<C-w>l")
 vim.keymap.set("n", "<M-k>", "<C-w>k")
 vim.keymap.set("n", "<M-j>", "<C-w>j")
 vim.keymap.set("n", "<M-h>", "<C-w>h")
-vim.keymap.set("n", "<leader>x", "<C-w>q")
 
 -- greatest remap ever
-vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("x", "<leader>p", '"_dP')
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({"n", "v"}, "<leader>y", "\"+y")
-vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
 --rename under cursor
 vim.keymap.set("n", "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 -- vim.keymap.set("n", "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left><C-f>")
 
-vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-vim.keymap.set('n', '<leader>q', '<c-w>q')
+vim.keymap.set("n", "<leader>q", "<c-w>q")

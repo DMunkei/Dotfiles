@@ -7,7 +7,7 @@ return {
 	config = function()
 		local lint = require("lint")
 		lint.linters_by_ft = {
-			python = { "pylint", "ruff" },
+			python = { "flake8" },
 		}
 		vim.keymap.set("n", "<leader>o", function()
 			lint.try_lint()

@@ -13,3 +13,12 @@ def foo():
     else:
         c = "foorbar"
         print(c)
+
+
+foo
+foo
+foo
+foo
+
+
+vim

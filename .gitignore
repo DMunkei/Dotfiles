@@ -9,3 +9,4 @@ rofi
 tmux
 alacritty
 alacritty.*
+**.DS_STORE**

@@ -27,27 +27,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-	pattern = "kanagawa",
-	callback = function()
-		if vim.o.background == "light" then
-			vim.fn.system("kitty +kitten themes Kanagawa_light")
-		elseif vim.o.background == "dark" then
-			vim.fn.system("kitty +kitten themes Kanagawa_dragon")
-		else
-			vim.fn.system("kitty +kitten themes Kanagawa")
-		end
-	end,
-})
-
--- vim.api.nvim_create_autocmd("BufWritePre", {
--- 	pattern = "*",
--- 	callback = function(args)
--- 		require("conform").format({ bufnr = args.buf })
--- 	end,
--- })
---
---
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 	group = lint_augroup,

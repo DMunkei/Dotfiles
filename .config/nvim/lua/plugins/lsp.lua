@@ -3,114 +3,42 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{ "folke/neodev.nvim", opts = {} },
+		"saghen/blink.cmp",
 	},
 	config = function()
 		vim.diagnostic.config({
 			update_in_insert = false,
 			float = {
-				border = "single",
+				border = "rounded",
 				style = "minimal",
 			},
 		})
 
+		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			virtual_text = false,
+			signs = true,
+			underline = true,
+		})
+
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "single",
+			border = "rounded",
 			style = "minimal",
 		})
 
 		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-			border = "single",
+			border = "rounded",
 			style = "minimal",
 		})
 
 		require("lspconfig.ui.windows").default_options = {
-			border = "single",
+			border = "rounded",
 		}
-
-		local function diagnostics_handler(err, result, ctx)
-			if err ~= nil then
-				error("Failed to request diagnostics: " .. vim.inspect(err))
-			end
-
-			if result == nil then
-				return
-			end
-
-			local buffer = vim.uri_to_bufnr(result.uri)
-			local namespace = vim.lsp.diagnostic.get_namespace(ctx.client_id)
-
-			local diagnostics = vim.tbl_map(function(diagnostic)
-				local resultLines = vim.split(diagnostic.message, "\n")
-				local output = vim.fn.reverse(resultLines)
-				return {
-					bufnr = buffer,
-					lnum = diagnostic.range.start.line,
-					end_lnum = diagnostic.range["end"].line,
-					col = diagnostic.range.start.character,
-					end_col = diagnostic.range["end"].character,
-					severity = diagnostic.severity,
-					message = table.concat(output, "\n\n"),
-					source = diagnostic.source,
-					code = diagnostic.code,
-				}
-			end, result.diagnostics)
-
-			vim.diagnostic.set(namespace, buffer, diagnostics)
-		end
-
-		local builtin = require("telescope.builtin")
-		local lspconfig = require("lspconfig")
 		--
-		-- local vue_ts_plugin = "/usr/lib/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin"
-		-- lspconfig.tsserver.setup({
-		-- 	init_options = {
-		-- 		plugins = {
-		-- 			{
-		-- 				name = "@vue/typescipt-plugin",
-		-- 				location = vue_ts_plugin,
-		-- 				languages = { "javascript", "typescript", "vue" },
-		-- 			},
-		-- 		},
-		-- 	},
-		-- 	filetypes = {
-		-- 		"javascript",
-		-- 		"javascriptreact",
-		-- 		"javascript.jsx",
-		-- 		"typescript",
-		-- 		"typescriptreact",
-		-- 		"typescript.tsx",
-		-- 		"vue",
-		-- 	},
-		-- 	root_dir = function(...)
-		-- 		return lspconfig.util.root_pattern(".git")(...)
-		-- 	end,
-		-- 	single_file_support = false,
-		-- 	settings = {
-		-- 		typescript = {
-		-- 			inlayHints = {
-		-- 				includeInlayParameterNameHints = "literal",
-		-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-		-- 				includeInlayFunctionParameterTypeHints = true,
-		-- 				includeInlayVariableTypeHints = false,
-		-- 				includeInlayPropertyDeclarationTypeHints = true,
-		-- 				includeInlayFunctionLikeReturnTypeHints = true,
-		-- 				includeInlayEnumMemberValueHints = true,
-		-- 			},
-		-- 		},
-		-- 		javascript = {
-		-- 			inlayHints = {
-		-- 				includeInlayParameterNameHints = "all",
-		-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-		-- 				includeInlayFunctionParameterTypeHints = true,
-		-- 				includeInlayVariableTypeHints = true,
-		-- 				includeInlayPropertyDeclarationTypeHints = true,
-		-- 				includeInlayFunctionLikeReturnTypeHints = true,
-		-- 				includeInlayEnumMemberValueHints = true,
-		-- 			},
-		-- 		},
-		-- 	},
-		-- })
+		local builtin = require("telescope.builtin")
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		local lspconfig = require("lspconfig")
 		lspconfig.lua_ls.setup({
+			capabilities = capabilities,
 			settings = {
 				Lua = {
 					completion = {
@@ -124,46 +52,80 @@ return {
 			},
 		})
 		--
-		-- local util = require("lspconfig.util")
-		-- local function get_typescript_server_path(root_dir)
-		-- 	local global_ts = "/usr/lib/node_modules/typescript/lib/"
-		-- 	local found_ts = ""
-		-- 	local function check_dir(path)
-		-- 		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
-		-- 		if util.path.exists(found_ts) then
-		-- 			return path
-		-- 		end
-		-- 	end
-		-- 	if util.search_ancestors(root_dir, check_dir) then
-		-- 		return found_ts
-		-- 	else
-		-- 		return global_ts
-		-- 	end
-		-- end
-		--
-		-- lspconfig.volar.setup({
-		-- 	on_new_config = function(new_config, new_root_dir)
-		-- 		new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-		-- 	end,
-		-- })
 		-- -- Python
 		-- lspconfig.ruff_lsp.setup({})
 		--
-		-- lspconfig.clangd.setup({})
-		-- lspconfig.yamlls.setup({})
+
+		-- lspconfig.pylsp.setup({
+		-- 	settings = {
+		-- 		pylsp = {
+		-- 			plugins = {
+		-- 				rope = { enabled = true },
+		-- 				-- formatter options
+		-- 				black = { enabled = true },
+		-- 				autopep8 = { enabled = false },
+		-- 				yapf = { enabled = false },
+		-- 				-- linter options
+		-- 				pylint = { enabled = false, executaele = "pylint" },
+		-- 				pyflakes = { enabled = false },
+		-- 				pycodestyle = { enabled = false },
+		-- 				-- type checker
+		-- 				pylsp_mypy = { enabled = false },
+		-- 				-- auto-completion options
+		-- 				jedi_completion = { enabled = false, fuzzy = false },
+		-- 				-- import sorting
+		-- 				pyls_isort = { enabled = false },
+		-- 			},
+		-- 		},
+		-- 	},
+		-- 	flags = {
+		-- 		debounce_text_changes = 200,
+		-- 	},
+		-- })
+		lspconfig.basedpyright.setup({
+			capabilities = capabilities,
+			settings = {
+				basedpyright = {
+					analysis = {
+						diagnosticMode = "workspace",
+						typeCheckingMode = "standard",
+						diagnosticSeverityOverrides = {
+							reportIncompatibleVariableOverride = "none",
+							reportIncompatibleMethodOverride = "none",
+							reportAssignmentType = "none",
+						},
+					},
+				},
+			},
+		})
+		-- lspconfig.pyright.setup({
+		-- 	settings = {
+		-- 		python = {
+		-- 			analysis = {
+		-- 				autoSearchPaths = true,
+		-- 				diagnosticMode = "workspace",
+		-- 				useLibraryCodeForTypes = true,
+		-- 				typeCheckingMode = "standard",
+		-- 			},
+		-- 		},
+		-- 	},
+		-- })
+		--
 		for _, server in ipairs({
 			"dockerls",
 			"docker_compose_language_service",
+			"ts_ls",
 			"html",
 			"cssls",
 			"bashls",
 			"marksman",
-			"pyright",
 			"jedi_language_server",
+			"sqlls",
 		}) do
-			lspconfig[server].setup({})
+			lspconfig[server].setup({ capabilities = capabilities })
 		end
 		lspconfig.emmet_ls.setup({
+			capabilities = capabilities,
 			filetypes = {
 				"css",
 				"html",
@@ -184,12 +146,11 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 				end
 				map("gd", builtin.lsp_definitions, "[G]oto [D]ddefinition")
-				map("gr", builtin.lsp_references, "[G]oto [R]eferences")
+				map("rn", vim.lsp.buf.rename, "Rename")
 				map("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
 				map("<leader>D", builtin.lsp_type_definitions, "Type [D]definition")
 				map("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]symbols")
 				map("<leader>Ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ssymbols")
-				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -242,6 +203,9 @@ return {
 						end,
 					})
 				end
+				if client == nil then
+					return
+				end
 
 				if client.name == "rust" then
 					local rt = require("rust-tools")
@@ -254,22 +218,20 @@ return {
 				-- In here you can run any setup code you want to apply to all your language servers.
 				-- For server specific setups, see `on_attach` for lspconfig
 
-				if client.name == "ruff_lsp" then
-					client.server_capabilities.hoverProvider = false
-				end
+				-- if client.name == "ruff_lsp" then
+				-- 	client.server_capabilities.hoverProvider = false
+				-- end
 
-				if client.name == "typescript-tools" then
-					client.server_capabilities.diagnosticsProvider = false
-				end
-
-				if client.name == "pyright" then
+				if client.name == "basedpyright" or client.name == "pyright" then
 					client.server_capabilities.hoverProvider = false
 					client.server_capabilities.renameProvider = false
-					client.server_capabilities.completionProvider = false
+					-- client.server_capabilities.completionProvider = false
 				end
 
 				if client.name == "jedi_language_server" then
 					client.server_capabilities.definitionProvider = false
+					client.server_capabilities.completionProvider = false
+					client.server_capabilities.referencesProvider = false
 				end
 			end,
 		})

@@ -1,3 +1,4 @@
+vim.opt.previewheight = 50
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -50,18 +51,18 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number,line"
 
 vim.opt.colorcolumn = "120"
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "auto:1-4"
 
 vim.opt.guicursor:append({ "i:block", "i:blinkon5" })
 
-vim.opt.list = true
+vim.opt.list = false
 vim.opt.listchars = { eol = "↴", space = "⋅", tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.termguicolors = true
 
 vim.opt.fillchars:append("diff:/")
 
 vim.diagnostic.config({
-	virtual_text = true,
+	-- virtual_text = true,
 	float = {
 		focusable = true,
 		source = "always",

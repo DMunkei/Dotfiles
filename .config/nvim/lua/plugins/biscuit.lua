@@ -1,3 +1,0 @@
-return {
-  "Biscuit-Theme/nvim"
-}

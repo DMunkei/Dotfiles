@@ -5,8 +5,20 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"BurntSushi/ripgrep",
+		"nvim-telescope/telescope-live-grep-args.nvim",
+		-- This will not install any breaking changes.
+		-- For major updates, this must be adjusted manually.
+		version = "^1.0.0",
 	},
+
 	config = function()
+		local config = require("fzf-lua.config")
+		local actions = require("trouble.sources.fzf").actions
+		config.defaults.actions.files["ctrl-t"] = actions.open
+
+		local lga_actions = require("telescope-live-grep-args.actions")
+		local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+		local open_with_trouble = require("trouble.sources.telescope").open
 		require("telescope").setup({
 			extensions = {
 				["ui-select"] = {
@@ -17,10 +29,28 @@ return {
 					override_generic_sorter = true, -- override the generic sorter
 					override_file_sorter = true, -- override the file sorter
 					case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-					-- the default case_mode is "smart_case"
+					-- th default case_mode is "smart_case"
+				},
+				live_grep_args = {
+					auto_quoting = true, -- enable/disable auto-quoting
+					mappings = { -- extend mappings
+						i = {
+							["<C-k>"] = lga_actions.quote_prompt(),
+							["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+							["<C-t>"] = lga_actions.quote_prompt({ postfix = " --t " }),
+							["<C-f>"] = lga_actions.quote_prompt({ postfix = " -F " }),
+							-- freeze the current list and start a fuzzy search in the frozen list
+							["<C-space>"] = lga_actions.to_fuzzy_refine,
+						},
+					},
+					-- ... also accepts theme settings, for example:
+					-- theme = "dropdown", -- use dropdown theme
+					-- theme = { }, -- use own theme spec
+					-- layout_config = { mirror=true }, -- mirror preview pane
 				},
 			},
 			mappings = { -- extend mappings
+				vim.keymap.set("n", "<leader>gc", live_grep_args_shortcuts.grep_word_under_cursor),
 			},
 			file_ignore_patterns = {
 				"^node_modules/",
@@ -44,12 +74,16 @@ return {
 				"%.tmTheme",
 			},
 			defaults = {
-        sorting_strategy = "ascending",
-        winblend = 0,
-        layout_strategy = "horizontal",
-        wrap_results = true,
-        path_display ={"smart"},
-        layout_config ={prompt_position = "top"},
+				mappings = {
+					i = { ["<c-t>"] = open_with_trouble },
+					n = { ["<c-t>"] = open_with_trouble },
+				},
+				sorting_strategy = "ascending",
+				winblend = 0,
+				layout_strategy = "horizontal",
+				wrap_results = true,
+				path_display = { "filename_first" },
+				layout_config = { height = 0.95 },
 				preview = {
 					treesitter = {
 						disable = {
@@ -62,18 +96,12 @@ return {
 		})
 		require("telescope").load_extension("ui-select")
 		require("telescope").load_extension("fzf")
+		require("telescope").load_extension("live_grep_args")
 
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>ft", "<CMD>TodoTelescope<cr>", { desc = "FindTodos" })
+		-- vim.keymap.set("n", "<leader>ft", "<CMD>TodoTelescope<cr>", { desc = "FindTodos" })
 		vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
 		vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-		vim.keymap.set("n", "<leader>/", function()
-			-- You can pass additional configuration to telescope to change theme, layout, etc.
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-				winblend = 10,
-				previewer = false,
-			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
 
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
@@ -86,12 +114,16 @@ return {
 		-- vim.keymap.set('n', '<leader>ws', builtin.lsp_dynamic_workspace_symbols,
 		--     { desc = '[W]orkspace [S]ymbols' })
 		--     -- Slightly advanced example of overriding default behavior and theme
-		vim.keymap.set("n", "<leader>f", function()
-			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-				winblend = 10,
-				previewer = false,
-			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
+		-- vim.keymap.set("n", "<leader>f", function()
+		-- 	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+		-- 	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		-- 		layout_config = {
+		-- 			width = 200,
+		-- 			height = 50,
+		-- 		},
+		-- 		winblend = 10,
+		-- 		previewer = true,
+		-- 	}))
+		-- end, { desc = "[f] Fuzzily search in current buffer" })
 	end,
 }

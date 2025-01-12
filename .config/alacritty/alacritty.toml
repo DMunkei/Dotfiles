@@ -1,38 +1,6 @@
-[[colors.indexed_colors]]
-color = "0xffa066"
-index = 16
-
-[[colors.indexed_colors]]
-color = "0xff5d62"
-index = 17
-
-[colors.bright]
-black = "0x727169"
-blue = "0x7fb4ca"
-cyan = "0x7aa89f"
-green = "0x98bb6c"
-magenta = "0x938aa9"
-red = "0xe82424"
-white = "0xdcd7ba"
-yellow = "0xe6c384"
-
-[colors.normal]
-black = "0x090618"
-blue = "0x7e9cd8"
-cyan = "0x6a9589"
-green = "0x76946a"
-magenta = "0x957fb8"
-red = "0xc34043"
-white = "0xc8c093"
-yellow = "0xc0a36e"
-
-[colors.primary]
-background = "0x1f1f28"
-foreground = "0xdcd7ba"
-
-[colors.selection]
-background = "0x2d4f67"
-foreground = "0xc8c093"
+import = [
+  "~/.config/alacritty/themes/themes/kanagawa_wave.toml"
+]
 
 [env]
 TERM = "xterm-256color"
@@ -41,36 +9,36 @@ TERM = "xterm-256color"
 size=12.0
 
 [font.bold]
-family = "JetBrains Mono"
+family = "JetBrainsMono Nerd Font"
 # family = "xos4 Terminus"
 # family = "Terminess Nerd Font Mono"
-# family  = "Iosevka Term"
+# family  = "IosevkaTerm Nerd Font Mono"
 # family = "Hack Nerd Font"
 # family = "DeJaVuSansM Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrains Mono"
+family = "JetBrainsMono Nerd Font"
 # family = "Terminess Nerd Font Mono"
 # family = "Hack Nerd Font"
-# family  = "Iosevka Term"
+# family  = "IosevkaTerm Nerd Font Mono"
 # family = "DeJaVuSansM Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrains Mono"
+family = "JetBrainsMono Nerd Font"
 # family = "Terminess Nerd Font Mono"
 # family = "Hack Nerd Font"
-# family  = "Iosevka Term"
+# family  = "IosevkaTerm Nerd Font Mono"
 # family = "DeJaVuSansM Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "JetBrains Mono"
+family = "JetBrainsMono Nerd Font"
+# family  = "IosevkaTerm Nerd Font Mono"
 # family = "xos4 Terminus"
 # family = "Terminess Nerd Font Mono"
 # family = "Hack Nerd Font"
-# family  = "Iosevka Term"
 # family = "DeJaVuSansM Nerd Font"
 style = "Regular"
 
@@ -80,3 +48,9 @@ y = 4
 
 [selection]
 save_to_clipboard = true
+
+[window]
+decorations = 'buttonless'
+opacity = 0.8
+blur = true
+# startup_mode = 'Maximized'

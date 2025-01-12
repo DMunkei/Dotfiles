@@ -6,18 +6,19 @@ return {
 			log_level = vim.log.levels.DEBUG,
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
+				python = { "black", "isort" },
+				sql = { "sqlformatter" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 500,
+				timeout_ms = 5000,
 			},
-			vim.keymap.set({ "v", "n" }, "<leader>l", function()
+			vim.keymap.set({ "v", "n" }, "<leader>L", function()
 				conform.format({
 					lsp_fallback = true,
 					async = false,
-					timeout_ms = 500,
+					timeout_ms = 5000,
 				})
 			end),
 		})

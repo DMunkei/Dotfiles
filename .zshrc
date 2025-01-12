@@ -1,154 +1,40 @@
-fortune
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-# ZSH_THEME="spaceship"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
+fortune | cowsay
+# export OM_ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.config/zsh/"
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
-set -o vi
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+set -o emacs
+bindkey '^X^E' edit-command-line
 
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(
-    git
-    history-substring-search
-    colored-man-pages
-    # zsh-autosuggestions
-    # zsh-syntax-highlighting
-    fzf-tab
-    # zsh-z
-)
-
-source $ZSH/oh-my-zsh.sh
-# source ~/.config/zsh_config/fzf-tab.plugin.zsh
-
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
-#
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias zrc="nvim ~/.zshrc"
-alias brc="nvim ~/.bashrc"
-alias szrc="source ~/.zshrc"
-alias sbrc="source ~/.bashrc"
+# plugins=(
+#     history-substring-search
+#     colored-man-pages
+#     fzf-tab
+# )
 
 
-alias alac="nvim ~/.config/alacritty/alacritty.toml"
-alias cdnv="cd ~/.config/nvim/"
-alias n="nvim ."
-alias vim="nvim"
+[ -f "$HOME/.config/zsh/plugins/plugins.sh" ] && source "$HOME/.config/zsh/plugins/plugins.sh"
+[ -f "$HOME/.config/zsh/aliases.zsh" ] && source "$HOME/.config/zsh/aliases.zsh"
+[ -f "$HOME/.config/zsh/completions.zsh" ] && source "$HOME/.config/zsh/completions.zsh"
 
-alias act="source ./venv/bin/activate"
-alias dev="cd ~/Development/"
-alias odev="cd ~/Development/oletv2/"
-alias ost="cd ~/Development/ostip_django/"
-alias zew="cd ~/Development/zew_arbeitswelt_2023/"
 
-alias pms="python manage.py shell"
-alias pmr="python manage.py runserver"
-alias pmm="python manage.py makemigrations"
-alias pm="python manage.py migrate"
-alias pt="pytest"
-alias ptv="pytest -v"
-alias ptrp="pytest -rP"
-
-alias gs="git status"
-alias ga="git add ."
-alias gc="git commit"
-alias gd="git diff"
-alias gr="git reflog"
-alias gl="git log"
-alias glg="git log --pretty='%C(cyan)%ad %C(yellow)%h %C(blue)%aN %C(red)%d %Creset%s' --all --date-order --graph --date=iso"
-alias glo="git log --oneline --pretty='%C(cyan)%ad %C(yellow)%h %C(blue)%aN %C(red)%d %Creset%s' --all --date=iso"
-alias gp="git push"
-alias gb="git branch"
-alias lg="lazygit"
-
-alias spam="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias spu=" sudo pacman -Syu"
-alias ..="cd ../"
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-alias ght='xclip -sel c < ~/uni/githubtoken.txt'
-
-alias leetcode='cd ~/Development/leetcode/'
-alias aoc='cd ~/Development/AOC/aoc2022/rustacean'
-
-#TMUX
-alias odv='~/.config/tmux/olet-dev-shell.sh'
-alias ostdev='~/.config/tmux/ost-dev-shell.sh'
-alias zdv='~/.config/tmux/zew-dev-shell.sh'
-
-alias ta='tmux attach-session'
-alias tks='tmux kill-session'
-
-export LC_ALL=en_US.utf8
-export PATH=$PATH:/opt/pycharm-2020.2.3/bin/
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export PATH=$PATH:~/.scripts/
-export PATH=$PATH:~/go/bin/
-export PATH=$PATH:~/godot/Godot_v4.2.2-stable_linux.x86_64
+export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
+export PYTHONBREAKPOINT=ipdb.set_trace  
 
-export GTK_IM_MODULE='fcitx'
-export QT_IM_MODULE='fcitx'
-export SDL_IM_MODULE='fcitx'
-export XMODIFIERS='@im=fcitx'
 
-alias ship_it="git push"
-alias man=batman
 eval "$(zoxide init zsh)"
 
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+export EDITOR=/opt/homebrew/bin/nvim
+# export JWT_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ikg5bmo1QU9Tc3dNcGhnMVNGeDdqYVYtbEI5dyIsImtpZCI6Ikg5bmo1QU9Tc3dNcGhnMVNGeDdqYVYtbEI5dyJ9.eyJhdWQiOiJhcGk6Ly85M2E5NjdkYy0xOThhLTRlZmUtYTk1Yi1iYWQxOGU4ODZhYWQiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC84ZmJkZWIyMC0xMzhlLTQzMzktYmE2Yi01ZmVhMWU2ZWZiNTQvIiwiaWF0IjoxNzI2NjQ5NTQwLCJuYmYiOjE3MjY2NDk1NDAsImV4cCI6MTcyNjY1NDE4OCwiYWNyIjoiMSIsImFpbyI6IkFWUUFxLzhYQUFBQVh2Uy9nWm5TME1VNWVjYmkzeVFuT1hTY2RQbmMzYXB1amxuSElvQ1pEemo5NS8vQjhuRVFjR2l4aTJQcjZPVERXdFE1MzZ1Qk5COVM1YTFIbSs0NVZPQlVsaFE1L3ZDdDB4NkxqOFdRMTE0PSIsImFtciI6WyJwd2QiLCJtZmEiXSwiYXBwaWQiOiI5M2E5NjdkYy0xOThhLTRlZmUtYTk1Yi1iYWQxOGU4ODZhYWQiLCJhcHBpZGFjciI6IjAiLCJkZXZpY2VpZCI6IjM2ODRmODgyLTY2MzAtNGYwZS1hYzM4LTUzZTE4MjUxYjIyNSIsImZhbWlseV9uYW1lIjoiS8O2c3RsZXIiLCJnaXZlbl9uYW1lIjoiRG9taW5pcXVlIEFtaXIiLCJpcGFkZHIiOiIxOTQuOC4yMTcuMTU4IiwibmFtZSI6IkvDtnN0bGVyIERvbWluaXF1ZSBBbWlyIiwib2lkIjoiODMzNjNhZDQtMmFhMy00MzZjLTkyZDktOTllZmZhYzU4ZmM5Iiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTE1NzkzODU4OTEtMTU4NzU1MTc5OC0yMTIyNTA3NTM3LTE0ODcyNSIsInJoIjoiMC5BU0FBSU91OWo0NFRPVU82YTFfcUhtNzdWTnhucVpPS0dmNU9xVnU2MFk2SWFxMGdBQWsuIiwic2NwIjoiY3VzdG9tLnJlYWQiLCJzdWIiOiJ5ZVV5ZU1aUUVxN3VlT1I2X3ozd0FpT2tzYWZRdTNxY2FBU2tEQngtN1MwIiwidGlkIjoiOGZiZGViMjAtMTM4ZS00MzM5LWJhNmItNWZlYTFlNmVmYjU0IiwidW5pcXVlX25hbWUiOiJES29lc3RsZXJAc3Ryb2Vlci5kZSIsInVwbiI6IkRLb2VzdGxlckBzdHJvZWVyLmRlIiwidXRpIjoiOWdMUE5NNnBWMFNidk1uWGtpQVZBQSIsInZlciI6IjEuMCJ9.BSKoKRV9wy3OH9VmI1qQ5rHBxuRbQxN3N14RLjcJWC4gMeJzsVOuYujt3EZR0JsagZK6soS4IdgRlpLTgPMog54Rm5KSUKqqps32hh5nM_tYjkJOfkYcWUADv_0PIT7tRtI6iLEIPJnI4lHH22sPBKNcoWk0l7fTuYxeLa5wbaBVeIs2k35RsLsE_4IP3OgX1FUvtXa55l9vh_8t0KC5YhSIz6QYkF5j4ct_uqW3qm0Aqrkl5aKPxXKabbrjlebsOmbP7mw6lE23JPsyQXLGD3rU2yYEwg2wld2s9HYqY6qJwz6ehaWRcYisGRovx-gNzHyZwC_LqxfQ5iTXHUL5lA
 
-source /opt/homebrew/opt/spaceship/spaceship.zsh
+# Move cursor forward by a word
+bindkey '^[[1;3C' forward-word   # Ctrl+Right Arrow
+# Move cursor backward by a word
+bindkey '^[[1;3D' backward-word  # Ctrl+Left Arrow
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
