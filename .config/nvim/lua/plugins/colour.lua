@@ -9,12 +9,9 @@ vim.opt.fillchars:append({
 	verthoriz = "╋",
 })
 --
--- Default options:
-return {
-	"rebelot/kanagawa.nvim",
-	priority = 1000,
-	config = function()
-		require("kanagawa").setup({
+local config = function()
+	require("kanagawa").setup({
+		{
 			compile = false, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
 			commentStyle = { italic = true },
@@ -62,11 +59,18 @@ return {
 				dark = "wave", -- try "dragon" !
 				light = "lotus",
 			},
-		})
-		-- setup must be called before loading
-		vim.cmd("colorscheme kanagawa")
-		-- vim.api.nvim_set_hl(1, "Linenr", {bg = "none", fg = "#C0A36E"})
-		-- vim.cmd([[highlight ColorColumn guibg=#C0A36E]])
-		-- vim.cmd([[highlight BlinkCmpMenuBorder guibg=]])
-	end,
+		},
+	})
+	vim.cmd.colorscheme("kanagawa-wave")
+	-- vim.api.nvim_set_hl(1, "Linenr", {bg = "none", fg = "#C0A36E"})
+	-- vim.cmd([[highlight ColorColumn guibg=#C0A36E]])
+	-- vim.cmd([[highlight BlinkCmpMenuBorder guibg=]])
+end
+
+return {
+	"rebelot/kanagawa.nvim",
+	lazy = false,
+	priority = 1000,
+	config = config,
+	build = "KanagawaCompile",
 }

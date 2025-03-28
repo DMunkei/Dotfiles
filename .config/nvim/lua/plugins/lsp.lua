@@ -51,41 +51,27 @@ return {
 				},
 			},
 		})
-		--
-		-- -- Python
-		-- lspconfig.ruff_lsp.setup({})
-		--
+		-- Python
+		lspconfig.ruff.setup({
+			init_options = {
+				settings = {
+					-- Any extra CLI arguments for `ruff` go here.
+					lint = { enabled = true },
+					args = {
+						-- line-length = 180
+						-- [lint]
+						-- preview=true
+						-- extend-select = ["E501", "N", "R", "I"]
+					},
+				},
+			},
+		})
 
-		-- lspconfig.pylsp.setup({
-		-- 	settings = {
-		-- 		pylsp = {
-		-- 			plugins = {
-		-- 				rope = { enabled = true },
-		-- 				-- formatter options
-		-- 				black = { enabled = true },
-		-- 				autopep8 = { enabled = false },
-		-- 				yapf = { enabled = false },
-		-- 				-- linter options
-		-- 				pylint = { enabled = false, executaele = "pylint" },
-		-- 				pyflakes = { enabled = false },
-		-- 				pycodestyle = { enabled = false },
-		-- 				-- type checker
-		-- 				pylsp_mypy = { enabled = false },
-		-- 				-- auto-completion options
-		-- 				jedi_completion = { enabled = false, fuzzy = false },
-		-- 				-- import sorting
-		-- 				pyls_isort = { enabled = false },
-		-- 			},
-		-- 		},
-		-- 	},
-		-- 	flags = {
-		-- 		debounce_text_changes = 200,
-		-- 	},
-		-- })
 		lspconfig.basedpyright.setup({
 			capabilities = capabilities,
 			settings = {
 				basedpyright = {
+					disableOrganizeImports = true,
 					analysis = {
 						diagnosticMode = "workspace",
 						typeCheckingMode = "standard",
@@ -98,19 +84,6 @@ return {
 				},
 			},
 		})
-		-- lspconfig.pyright.setup({
-		-- 	settings = {
-		-- 		python = {
-		-- 			analysis = {
-		-- 				autoSearchPaths = true,
-		-- 				diagnosticMode = "workspace",
-		-- 				useLibraryCodeForTypes = true,
-		-- 				typeCheckingMode = "standard",
-		-- 			},
-		-- 		},
-		-- 	},
-		-- })
-		--
 		for _, server in ipairs({
 			"dockerls",
 			"docker_compose_language_service",
@@ -135,9 +108,6 @@ return {
 				"htmldjango",
 			},
 		})
-		-- lspconfig.gdscript.setup({
-		-- 	filetypes = { "gd", "gdscript", "gdscript3" },
-		-- })
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-on-attach", { clear = true }),
@@ -146,12 +116,19 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 				end
 				map("gd", builtin.lsp_definitions, "[G]oto [D]ddefinition")
-				map("rn", vim.lsp.buf.rename, "Rename")
+				vim.api.nvim_set_keymap(
+					"n",
+					"rn",
+					"<cmd>lua vim.lsp.buf.rename()<CR>",
+					{ noremap = true, silent = true, desc = "Rename" }
+				)
+				-- map("rn", vim.lsp.buf.rename, "Rename", { noremap = true, silent = true })
 				map("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
 				map("<leader>D", builtin.lsp_type_definitions, "Type [D]definition")
 				map("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]symbols")
 				map("<leader>Ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ssymbols")
-				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+				vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
+				-- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help)
@@ -207,23 +184,12 @@ return {
 					return
 				end
 
-				if client.name == "rust" then
-					local rt = require("rust-tools")
-					-- Hover actions
-					vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-					-- Code action groups
-					vim.keymap.set("n", "<Leader>A", rt.code_action_group.code_action_group, { buffer = bufnr })
+				if client.name == "ruff" then
+					client.server_capabilities.hoverProvider = false
 				end
 
-				-- In here you can run any setup code you want to apply to all your language servers.
-				-- For server specific setups, see `on_attach` for lspconfig
-
-				-- if client.name == "ruff_lsp" then
-				-- 	client.server_capabilities.hoverProvider = false
-				-- end
-
 				if client.name == "basedpyright" or client.name == "pyright" then
-					client.server_capabilities.hoverProvider = false
+					-- client.server_capabilities.hoverProvider = false
 					client.server_capabilities.renameProvider = false
 					-- client.server_capabilities.completionProvider = false
 				end

@@ -15,10 +15,4 @@ def foo():
         print(c)
 
 
-foo
-foo
-foo
-foo
-
-
-vim
+foo()

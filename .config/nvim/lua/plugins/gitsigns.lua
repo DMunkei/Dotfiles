@@ -85,7 +85,7 @@ return {
 			gs.blame_line({ full = true })
 		end)
 		vim.keymap.set("n", "<leader>tb", gs.toggle_current_line_blame)
-		vim.keymap.set("n", "<leader>hd", gs.diffthis)
+		-- vim.keymap.set("n", "<leader>hd", gs.diffthis)
 		vim.keymap.set("n", "<leader>hD", function()
 			gs.diffthis("~")
 		end)

@@ -7,6 +7,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "black", "isort" },
+				-- python = { "ruff" },
 				sql = { "sqlformatter" },
 			},
 			format_on_save = {

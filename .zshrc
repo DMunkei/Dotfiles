@@ -7,6 +7,9 @@ bindkey -M vicmd v edit-command-line
 set -o emacs
 bindkey '^X^E' edit-command-line
 
+HISTSIZE=9999
+SAVEHIST=9999
+
 # plugins=(
 #     history-substring-search
 #     colored-man-pages
@@ -38,3 +41,5 @@ bindkey '^[[1;3C' forward-word   # Ctrl+Right Arrow
 # Move cursor backward by a word
 bindkey '^[[1;3D' backward-word  # Ctrl+Left Arrow
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+eval $(thefuck --alias)
