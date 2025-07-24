@@ -1,13 +1,7 @@
 return {
 	"folke/trouble.nvim",
-	opts = {
-		modes = {
-			lsp = {
-				win = { position = "right" },
-			},
-		},
-	},
 	cmd = "Trouble",
+	opts = {},
 	keys = {
 		{
 			"<leader>xx",
@@ -21,7 +15,7 @@ return {
 		},
 		{
 			"<leader>cs",
-			"<cmd>Trouble symbols toggle focus=false<cr>",
+			"<cmd>Trouble symbols toggle focus=false win.position=right win.size=100<cr>",
 			desc = "Symbols (Trouble)",
 		},
 		{

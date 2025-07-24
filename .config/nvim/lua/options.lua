@@ -1,3 +1,8 @@
+vim.o.winwidth = 100
+vim.o.winminwidth = 20
+vim.o.winheight = 10
+vim.o.winminheight = 5
+
 vim.opt.previewheight = 50
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -34,6 +39,7 @@ vim.opt.wrap = false
 
 vim.opt.scrolloff = 10
 vim.o.winbar = "%f"
+vim.o.winborder = "rounded"
 
 vim.o.completeopt = "menuone,noselect"
 
@@ -62,29 +68,36 @@ vim.opt.termguicolors = true
 vim.opt.fillchars:append("diff:/")
 
 vim.diagnostic.config({
-	-- virtual_text = true,
+	update_in_insert = false,
+	virtual_text = { current_line = true, under_curl = false },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "󰋇",
+			[vim.diagnostic.severity.HINT] = "󰌵",
+		},
+	},
+	under_curl = false,
 	float = {
+		border = "rounded",
+		style = "minimal",
 		focusable = true,
 		source = "always",
 	},
 })
 
 local diagnostic_goto = function(next, severity)
-	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	local go = next and vim.diagnostic.jump
 	severity = severity and vim.diagnostic.severity[severity] or nil
 	return function()
-		go({ severity = severity })
+		go({ count = next, severity = severity })
 	end
 end
 
 -- vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 -- vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
-vim.cmd([[sign define DiagnosticSignError text=󰅙 texthl=DiagnosticSignError linehl= numhl=]])
-vim.cmd([[sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=]])
-vim.cmd([[sign define DiagnosticSignInfo text=󰌵 texthl=DiagnosticSignInfo linehl= numhl=]])
-vim.cmd([[sign define DiagnosticSignHint text=󰋼 texthl=DiagnosticSignHint linehl= numhl=]])
+vim.keymap.set("n", "]e", diagnostic_goto(1, "ERROR"), { desc = "Next Error" })
+vim.keymap.set("n", "[e", diagnostic_goto(-1, "ERROR"), { desc = "Prev Error" })
+vim.keymap.set("n", "]w", diagnostic_goto(1, "WARN"), { desc = "Next Warning" })
+vim.keymap.set("n", "[w", diagnostic_goto(-1, "WARN"), { desc = "Prev Warning" })

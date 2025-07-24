@@ -1,4 +1,4 @@
-vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("warn")
 -- Load `./lua/options.lua`
 require("options")
 
@@ -7,9 +7,24 @@ require("keymaps")
 
 -- Load `./lua/autocmds.lua`
 require("autocmds")
---
+
 -- Load `./lua/usercmds.lua`
 require("usercmds")
+
+vim.cmd("packadd cfilter")
+
+vim.lsp.enable({
+	"lua-language-server",
+	"basedpyright",
+	"ruff",
+	"ty",
+	"jedi-language-server",
+	-- "pylsp",
+	"yaml-language-server",
+	"azure-pipelines-language-server",
+	"json-ls",
+	"bash-language-server",
+})
 
 -- Default installation path for lazy -- this will resolve to `~/.local/share/nvim`.
 -- See `:help stdpath()`
