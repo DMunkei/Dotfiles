@@ -19,10 +19,10 @@ vim.lsp.enable({
 	"ruff",
 	"ty",
 	"jedi-language-server",
-	-- "pylsp",
 	"yaml-language-server",
 	"azure-pipelines-language-server",
 	"json-ls",
+	"ts_ls",
 	"bash-language-server",
 })
 

@@ -1,0 +1,13 @@
+trigger: none
+pool: Self-Hosted-AgentPool
+jobs:
+- job: no_checkout
+  -steps:
+  - checkout: none
+  - script: |
+    echo "Hostname: $(hostname)"
+    hostname -I
+    cat /etc/os-release
+    free -h
+    df -h
+  displayName: "Get Agent Details"

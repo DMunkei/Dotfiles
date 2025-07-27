@@ -67,15 +67,24 @@ vim.opt.termguicolors = true
 
 vim.opt.fillchars:append("diff:/")
 
+vim.hl.priorities.semantic_tokens = 95
+
 vim.diagnostic.config({
-	update_in_insert = false,
-	virtual_text = { current_line = true, under_curl = false },
+	update_in_insert = true,
+	virtual_text = {
+		prefix = "⊛",
+		format = function(diagnostic)
+			local code = diagnostic.code and string.format("[%s]", diagnostic.code) or ""
+			return string.format("%s %s", code, diagnostic.message)
+		end,
+	},
+	current_line = true,
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = "",
-			[vim.diagnostic.severity.WARN] = "",
-			[vim.diagnostic.severity.INFO] = "󰋇",
-			[vim.diagnostic.severity.HINT] = "󰌵",
+			[vim.diagnostic.severity.ERROR] = "⚠️",
+			[vim.diagnostic.severity.WARN] = "🔥",
+			[vim.diagnostic.severity.INFO] = "🫏",
+			[vim.diagnostic.severity.HINT] = "💡",
 		},
 	},
 	under_curl = false,
@@ -83,7 +92,7 @@ vim.diagnostic.config({
 		border = "rounded",
 		style = "minimal",
 		focusable = true,
-		source = "always",
+		source = true,
 	},
 })
 
