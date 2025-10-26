@@ -34,6 +34,7 @@ return {
 			},
 		})
 		vim.cmd("colorscheme kanagawa")
+		vim.api.nvim_set_hl(0, "NonText", { fg = "#D27E99", bg = "NONE" })
 	end,
 	build = function()
 		vim.cmd("KanagawaCompile")

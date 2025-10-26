@@ -7,19 +7,42 @@ return {
 	},
 	{
 		"saghen/blink.cmp",
-		dependencies = { "rafamadriz/friendly-snippets", "onsails/lspkind.nvim", "moyiz/blink-emoji.nvim" },
-		version = "1.*",
+		dependencies = {
+			{ "rafamadriz/friendly-snippets", version = "v2.*" },
+			"onsails/lspkind.nvim",
+			"moyiz/blink-emoji.nvim",
+		},
+		version = "*",
 		opts = {
+			snippets = { preset = "luasnip" },
 			cmdline = {
+				enabled = true,
 				keymap = {
-					preset = "enter",
-					["<Tab>"] = { "snippet_forward", "fallback" },
-					["<CR>"] = { "accept_and_enter", "fallback" },
+					preset = "cmdline",
+					["<Right>"] = false,
+					["<Left>"] = false,
+				},
+				completion = {
+					list = { selection = { preselect = false } },
 					menu = {
-						completion = { auto_show = true },
+						auto_show = function(ctx)
+							return vim.fn.getcmdtype() == ":"
+						end,
 					},
+					ghost_text = { enabled = true },
 				},
 			},
+
+			-- cmdline = {
+			-- 	keymap = {
+			-- 		preset = "enter",
+			-- 		["<Tab>"] = { "snippet_forward", "fallback" },
+			-- 		["<CR>"] = { "accept_and_enter", "fallback" },
+			-- 		menu = {
+			-- 			completion = { auto_show = true },
+			-- 		},
+			-- 	},
+			-- },
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer", "emoji", "sql" },
 				min_keyword_length = function(ctx)
@@ -69,18 +92,32 @@ return {
 				["<S-Tab>"] = {},
 			},
 			completion = {
+				documentation = {
+					auto_show = true,
+					treesitter_highlighting = true,
+					window = {
+						min_width = 40,
+						max_width = 40,
+						max_height = 40,
+						border = "rounded",
+						scrollbar = true,
+						winblend = 0,
+					},
+				},
+
+				ghost_text = { enabled = true },
+				keyword = { range = "full" },
 				menu = {
+					auto_show = true,
+					enabled = true,
+					min_width = 30,
+					max_height = 38,
+					winblend = 0,
+					scrolloff = 0,
+					border = "rounded",
+
 					draw = {
 						components = {
-
-							label = {
-								text = function(ctx)
-									return require("colorful-menu").blink_components_text(ctx)
-								end,
-								highlight = function(ctx)
-									return require("colorful-menu").blink_components_highlight(ctx)
-								end,
-							},
 							kind_icon = {
 								text = function(ctx)
 									local lspkind = require("lspkind")
@@ -120,13 +157,22 @@ return {
 			},
 			fuzzy = {
 				sorts = {
-					"exact",
-					-- defaults
 					"score",
+					"exact",
 					"sort_text",
 				},
 			},
-			signature = { enabled = true, window = { border = "rounded" } },
+			signature = {
+				enabled = true,
+				window = {
+					max_width = 50,
+					min_width = 50,
+					max_height = 20,
+					border = "double",
+					treesitter_highlighting = true,
+					show_documentation = true,
+				},
+			},
 		},
 	},
 }

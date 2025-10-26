@@ -23,24 +23,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 		map("gD", fzflua.lsp_declarations, "[G]oto [D]eclaration")
 		map("gd", fzflua.lsp_definitions, "[G]oto [D]efinition")
-		map("gr", fzflua.lsp_references, "[G]oto [R]eferences")
+		-- map("gr", fzflua.lsp_references, "[G]oto [R]eferences")
 		map("gI", fzflua.lsp_implementations, "[G]oto [I]mplementation")
 		map("<leader>D", fzflua.lsp_typedefs, "Type [D]definition")
 		map("<leader>ds", fzflua.lsp_document_symbols, "[D]ocument [S]symbols")
 		map("<leader>Ws", fzflua.lsp_live_workspace_symbols, "[W]orkspace [S]ssymbols")
-		map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+		map("<leader>la", vim.lsp.buf.code_action, "[C]ode [A]ction")
 		vim.keymap.set("n", "<leader>rn", function()
 			return ":IncRename " .. vim.fn.expand("<cword>")
 		end, { expr = true })
 
 		map("K", vim.lsp.buf.hover, "Hover Documentation")
-		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
+		vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action)
 		vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help)
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		--- @param method string
 		local supports_method = function(method)
-			return client.supports_method(method, { bufnr = event.buf })
+			return client:supports_method(method, { bufnr = event.buf })
 		end
 		function augroup(name, options)
 			options = vim.F.if_nil(options, {})

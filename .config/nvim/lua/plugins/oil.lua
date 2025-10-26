@@ -3,7 +3,8 @@ return {
 
 	priority = 1000,
 	config = function()
-		require("oil").setup({
+		oil = require("oil")
+		oil.setup({
 			default_file_explorer = true,
 			columns = { "icon", "size" },
 			-- Window-local options to use for oil buffers
@@ -38,7 +39,7 @@ return {
 				["g."] = "actions.toggle_hidden",
 			},
 			-- Set to false to disable all of the above keymaps
-			use_default_keymaps = true,
+			use_default_keymaps = false,
 			view_options = {
 				-- Show files and directories that start with "."
 				show_hidden = true,
@@ -52,6 +53,12 @@ return {
 				end,
 			},
 		})
-		vim.keymap.set("n", "<Leader>e", "<cmd>Oil<cr>")
+		vim.keymap.set("n", "<leader>e", function()
+			oil.toggle_float()
+			require("oil.util").run_after_load(0, function()
+				oil.open_preview()
+			end)
+		end, { desc = "[O]il" })
+		-- vim.keymap.set("n", "<Leader>e", "<cmd>Oil<cr>")
 	end,
 }

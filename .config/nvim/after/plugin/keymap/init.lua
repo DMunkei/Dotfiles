@@ -8,7 +8,7 @@ vim.keymap.set("i", "kj", "<esc>")
 -- inoremap("<CR>", "<CR><ESC>zzi") Typewriter scrolling
 
 -- vim.keymap.set("n", "<leaer>e", ":Ex<CR>")
-vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Open parent directory" })
+-- vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Open parent directory" })
 
 vim.keymap.set("n", "'", "<Cmd>norm gcc<CR>")
 vim.keymap.set("v", "'", "gc", { remap = true })

@@ -3,9 +3,12 @@ return {
 	lazy = true,
 	cmd = "UndotreeToggle",
 	keys = {
-		{ "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "[Undotree] Toggle" },
+		{
+			"<leader>u",
+			"<cmd>UndotreeToggle<CR>",
+			desc = "[Undotree] Toggle",
+		},
+		{ "J <cmd>UndotreeNextState<CR> " },
+		{ "K <cmd>UndotreePreviousState<CR> " },
 	},
-	config = function()
-		vim.g.undotree_WindowLayout = 2
-	end,
 }

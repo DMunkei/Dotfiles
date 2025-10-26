@@ -14,10 +14,11 @@ require("usercmds")
 vim.cmd("packadd cfilter")
 
 vim.lsp.enable({
+	"rust-analyzer",
 	"lua-language-server",
 	"basedpyright",
 	"ruff",
-	"ty",
+	-- "ty",
 	"jedi-language-server",
 	"yaml-language-server",
 	"azure-pipelines-language-server",

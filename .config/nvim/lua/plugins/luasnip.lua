@@ -1,51 +1,90 @@
 return {
-  "L3MON4D3/LuaSnip",
-  dependencies = { "rafamadriz/friendly-snippets" },
-  -- follow latest release.
-  version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-  -- install jsregexp (optional!).
-  build = "make install_jsregexp",
-  config = function()
-    require("luasnip.loaders.from_vscode").lazy_load()
-    local ls = require("luasnip")
-    local s = ls.snippet
-    local t = ls.text_node
-    local i = ls.insert_node
-    local extras = require("luasnip.extras")
-    local rep = extras.rep
+	"L3MON4D3/LuaSnip",
+	dependencies = { "rafamadriz/friendly-snippets" },
+	-- follow latest release.
+	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!).
+	build = "make install_jsregexp",
+	config = function()
+		require("luasnip.loaders.from_vscode").lazy_load()
+		local ls = require("luasnip")
+		local s = ls.snippet
+		local t = ls.text_node
+		local i = ls.insert_node
+		local extras = require("luasnip.extras")
+		local rep = extras.rep
 
-    ls.setup({
-      history = true,
-    })
-    ls.filetype_extend("python", { "django" })
-    ls.filetype_extend("javascript", { "vue" })
-    --
-    vim.keymap.set({ "i" }, "<C-K>", function()
-      ls.expand()
-    end, { silent = true })
-    vim.keymap.set({ "i", "s" }, "<C-L>", function()
-      ls.jump(1)
-    end, { silent = true })
-    vim.keymap.set({ "i", "s" }, "<C-J>", function()
-      ls.jump(-1)
-    end, { silent = true })
+		ls.setup({
+			history = true,
+		})
+		ls.filetype_extend("python", { "django" })
+		ls.filetype_extend("javascript", { "vue" })
+		--
+		vim.keymap.set({ "i" }, "<C-K>", function()
+			ls.expand()
+		end, { silent = true })
+		vim.keymap.set({ "i", "s" }, "<C-L>", function()
+			ls.jump(1)
+		end, { silent = true })
+		vim.keymap.set({ "i", "s" }, "<C-J>", function()
+			ls.jump(-1)
+		end, { silent = true })
 
-    vim.keymap.set({ "i", "s" }, "<C-E>", function()
-      if ls.choice_active() then
-        ls.change_choice(1)
-      end
-    end, { silent = true })
+		vim.keymap.set({ "i", "s" }, "<C-E>", function()
+			if ls.choice_active() then
+				ls.change_choice(1)
+			end
+		end, { silent = true })
 
-    ls.add_snippets("rust", {
-      s({ trig = "prd", dscr = "Named debug print {:?}" }, {
-        t('println!("'),
-        i(1, "var"),
-        t(' = {:?}", '),
-        rep(1),
-        t(");"),
-      }),
-    })
-  end,
+		-- HURl
+		ls.add_snippets("hurl", {
+			s({ trig = "spl", dscr = "New hurl endpoint" }, {
+				t('{"search_params" : {"'),
+				i(1, "entity"),
+				t('"}: ['),
+				i(2, "things"),
+				t("]'})"),
+			}),
+		})
+
+		ls.add_snippets("hurl", {
+			s({ trig = "hrl", dscr = "New hurl endpoint" }, {
+				t("http://localhost:8000/api/v1/"),
+				i(1, "entity"),
+				t("/"),
+			}),
+		})
+
+		ls.add_snippets("python", {
+			s({ trig = "scf", dscr = "Serializer CharField" }, {
+				t("serializers.CharField("),
+				i(1, "var"),
+				t(")"),
+			}),
+		})
+
+		ls.add_snippets("python", {
+			s({ trig = "ti", dscr = "type ignore" }, { t("#type: ignore") }),
+		})
+
+		ls.add_snippets("python", {
+			s({ trig = "scr", dscr = "Serializer ReadOnly" }, {
+				t("serializers.ReadOnlyField("),
+				i(1, "var"),
+				t(")"),
+			}),
+		})
+
+		ls.add_snippets("rust", {
+			s({ trig = "prd", dscr = "Named debug print {:?}" }, {
+				t('println!("'),
+				i(1, "var"),
+				t(' = {:?}", '),
+				rep(1),
+				t(");"),
+			}),
+		})
+	end,
 }
 --
 -- require("luasnip.loaders.from_vscode").lazy_load()

@@ -1,4 +1,4 @@
 return {
 	"tpope/vim-fugitive",
-	-- vim.keymap.set("n", "<leader>g", "<cmd>Git<CR>")
+	vim.keymap.set("n", ",g", "<cmd>Git<CR>"),
 }

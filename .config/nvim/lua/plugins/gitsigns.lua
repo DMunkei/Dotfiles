@@ -31,14 +31,14 @@ return {
 				follow_files = true,
 			},
 			attach_to_untracked = true,
-			current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+			current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
 			current_line_blame_opts = {
 				virt_text = true,
 				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
 				delay = 1000,
 				ignore_whitespace = false,
 			},
-			current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+			-- current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
 			sign_priority = 6,
 			update_debounce = 100,
 			status_formatter = nil, -- Use default
@@ -74,7 +74,6 @@ return {
 			return "<Ignore>"
 		end, { expr = true })
 
-		--
 		-- Actions
 		vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
 		vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
@@ -82,8 +81,11 @@ return {
 		vim.keymap.set("n", "<leader>hS", gs.stage_buffer)
 		vim.keymap.set("n", "<leader>hR", gs.reset_buffer)
 		vim.keymap.set("n", "<leader>hp", gs.preview_hunk)
+		vim.keymap.set("n", "<leader>hb", gs.blame_line)
+		vim.keymap.set("n", "<leader>b", gs.blame)
 		vim.keymap.set("n", "<leader>tb", gs.toggle_current_line_blame)
-		-- vim.keymap.set("n", "<leader>hd", gs.diffthis)
+		vim.keymap.set("n", "<leader>hd", gs.diffthis)
+		vim.keymap.set("n", "<leader>tw", "<Cmd>Gitsigns toggle_word_diff<CR>")
 		vim.keymap.set("n", "<leader>hD", function()
 			gs.diffthis("~")
 		end)
