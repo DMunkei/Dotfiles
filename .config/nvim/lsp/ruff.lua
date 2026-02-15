@@ -21,18 +21,18 @@ return {
 		".git",
 	},
 	settings = {
-		logLevel = "error",
-		lineLength = 120,
-		targetVersion = "py312",
-		format = {
-			quoteStyle = "double",
-			skipMagicTrailingComma = true,
-			lineEnding = "lf",
-			preview = false,
-		},
-		lint = {
-			enabled = true,
-			preview = true,
-		},
+		-- logLevel = "error",
+		-- lineLength = 120,
+		-- targetVersion = "py312",
+		-- format = {
+		-- 	quoteStyle = "double",
+		-- 	skipMagicTrailingComma = true,
+		-- 	lineEnding = "lf",
+		-- 	preview = true,
+		-- },
+		-- lint = {
+		-- 	enabled = true,
+		-- 	preview = true,
+		-- },
 	},
 }

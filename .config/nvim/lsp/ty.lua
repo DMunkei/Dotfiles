@@ -1,11 +1,16 @@
+local ok, blink = pcall(require, "blink.cmp")
+if not ok then
+	return {}
+end
+local capabilities = blink.get_lsp_capabilities()
 return {
+	capabilities = capabilities,
 	on_init = function(client)
-		client.server_capabilities.typeDefinitionProvider = false
-		client.server_capabilities.definitionProvider = false
-		client.server_capabilities.completionProvider = false
-		client.server_capabilities.referencesProvider = false
-		client.server_capabilities.hoverProvider = false
-		client.server_capabilities.documentSymbolProvider = false
+		client.server_capabilities.typeDefinitionProvider = true
+		client.server_capabilities.definitionProvider = true
+		client.server_capabilities.referencesProvider = true
+		client.server_capabilities.hoverProvider = true
+		client.server_capabilities.documentSymbolProvider = true
 	end,
 	cmd = { "ty", "server" },
 	filetypes = { "python" },

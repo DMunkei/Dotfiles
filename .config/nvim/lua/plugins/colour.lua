@@ -4,7 +4,7 @@ return {
 	priority = 1000,
 	config = function()
 		require("kanagawa").setup({
-			transparent = true,
+			transparent = false,
 			compile = true, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
 			terminalColors = true, -- define vim.g.terminal_color_{0,17}

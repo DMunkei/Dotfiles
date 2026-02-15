@@ -5,6 +5,7 @@ return {
 			menu = { width = 100 },
 		})
 	end,
+	-- what
 	vim.keymap.set("n", "<leader>a", function()
 		require("harpoon.mark").add_file()
 	end),

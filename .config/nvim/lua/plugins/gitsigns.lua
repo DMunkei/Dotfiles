@@ -26,6 +26,7 @@ return {
 			numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
 			linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 			word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+			diff_opts = { algorith = "patience" },
 			watch_gitdir = {
 				interval = 1000,
 				follow_files = true,
@@ -45,7 +46,7 @@ return {
 			max_file_length = 40000, -- Disable if file is longer than this (in lines)
 			preview_config = {
 				-- Options passed to nvim_open_win
-				border = "single",
+				border = "rounded",
 				style = "minimal",
 				relative = "cursor",
 				row = 0,
@@ -59,7 +60,7 @@ return {
 				return "]czz"
 			end
 			vim.schedule(function()
-				gs.next_hunk()
+				gs.nav_hunk("next", { wrap = true, target = "all" })
 			end)
 			return "<Ignore>"
 		end, { expr = true })
@@ -69,7 +70,7 @@ return {
 				return "[czz"
 			end
 			vim.schedule(function()
-				gs.prev_hunk()
+				gs.nav_hunk("prev", { wrap = true, target = "all" })
 			end)
 			return "<Ignore>"
 		end, { expr = true })
@@ -77,7 +78,6 @@ return {
 		-- Actions
 		vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
 		vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-		vim.keymap.set({ "n", "v" }, "<leader>hu", gs.undo_stage_hunk)
 		vim.keymap.set("n", "<leader>hS", gs.stage_buffer)
 		vim.keymap.set("n", "<leader>hR", gs.reset_buffer)
 		vim.keymap.set("n", "<leader>hp", gs.preview_hunk)
@@ -85,11 +85,16 @@ return {
 		vim.keymap.set("n", "<leader>b", gs.blame)
 		vim.keymap.set("n", "<leader>tb", gs.toggle_current_line_blame)
 		vim.keymap.set("n", "<leader>hd", gs.diffthis)
-		vim.keymap.set("n", "<leader>tw", "<Cmd>Gitsigns toggle_word_diff<CR>")
-		vim.keymap.set("n", "<leader>hD", function()
-			gs.diffthis("~")
+		vim.keymap.set("n", "<leader>hD", ":Gitsigns diffthis ")
+		vim.keymap.set("n", "<leader>ic", function()
+			x = gs.blame_line()
+			print(vim.inspect(x))
 		end)
-		vim.keymap.set("n", "<leader>td", gs.toggle_deleted)
+		vim.keymap.set("n", "<leader>hq", function()
+			gs.setqflist("all")
+		end)
+		vim.keymap.set("n", "<leader>tw", "<Cmd>Gitsigns toggle_word_diff<CR>")
+		vim.keymap.set("n", "<leader>td", gs.preview_hunk_inline)
 
 		-- Text object
 		vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

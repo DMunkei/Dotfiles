@@ -18,4 +18,4 @@ def with_style(line: str, word: str, style: Style):
     output += "-" * len(word)
 
 
-print(with_style("ty is a fast type checker for Python.", "fast", "underlined"))  #
+print(with_style("ty is a fast type checker for Python.", "fast", "underlined"))

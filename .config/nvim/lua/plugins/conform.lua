@@ -7,7 +7,6 @@ return {
 
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- python = { "black", "ruff_organize_imports" },
 				python = {
 					-- To fix auto-fixable lint errors.
 					"ruff_fix",
@@ -18,15 +17,10 @@ return {
 				},
 				bash = { "shfmt" },
 				json = { "jq" },
-				yaml = { "yamlfix", "yamlfmt" },
-				sql = { "sqlfluff" },
+				yaml = { "yamlfix", "yamlfmt", "prettierd" },
+				sql = { "sql-format" },
 			},
 			format_on_save = { lsp_fallback = true, timeout_ms = 2000 },
-			formatters = {
-				sqlfluff = {
-					prepend_args = { "--dialect=mysql" },
-				},
-			},
 			vim.keymap.set({ "v", "n" }, "<leader>L", function()
 				conform.format({
 					lsp_fallback = true,

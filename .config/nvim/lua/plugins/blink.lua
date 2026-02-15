@@ -33,18 +33,8 @@ return {
 				},
 			},
 
-			-- cmdline = {
-			-- 	keymap = {
-			-- 		preset = "enter",
-			-- 		["<Tab>"] = { "snippet_forward", "fallback" },
-			-- 		["<CR>"] = { "accept_and_enter", "fallback" },
-			-- 		menu = {
-			-- 			completion = { auto_show = true },
-			-- 		},
-			-- 	},
-			-- },
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "emoji", "sql" },
+				default = { "lazydev", "lsp", "path", "snippets", "buffer", "emoji", "sql" },
 				min_keyword_length = function(ctx)
 					-- only applies when typing a command, doesn't apply to arguments
 					if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
@@ -53,6 +43,12 @@ return {
 					return 0
 				end,
 				providers = {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						-- make lazydev completions top priority (see `:h blink.cmp`)
+						score_offset = 100,
+					},
 					emoji = {
 						module = "blink-emoji",
 						name = "Emoji",
@@ -115,43 +111,6 @@ return {
 					winblend = 0,
 					scrolloff = 0,
 					border = "rounded",
-
-					draw = {
-						components = {
-							kind_icon = {
-								text = function(ctx)
-									local lspkind = require("lspkind")
-									local icon = ctx.kind_icon
-									if vim.tbl_contains({ "Path" }, ctx.source_name) then
-										local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
-										if dev_icon then
-											icon = dev_icon
-										end
-									else
-										icon = lspkind.symbolic(ctx.kind, {
-											mode = "symbol",
-										})
-									end
-
-									return icon .. ctx.icon_gap
-								end,
-
-								-- Optionally, use the highlight groups from nvim-web-devicons
-								-- You can also add the same function for `kind.highlight` if you want to
-								-- keep the highlight groups in sync with the icons.
-								highlight = function(ctx)
-									local hl = ctx.kind_hl
-									if vim.tbl_contains({ "Path" }, ctx.source_name) then
-										local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
-										if dev_icon then
-											hl = dev_hl
-										end
-									end
-									return hl
-								end,
-							},
-						},
-					},
 				},
 				list = { selection = { auto_insert = true } },
 			},

@@ -1,4 +1,3 @@
-local util = require("lspconfig.util")
 local ok, blink = pcall(require, "blink.cmp")
 if not ok then
 	return {}
@@ -9,7 +8,13 @@ return {
 	default_config = {
 		cmd = { "azure-pipelines-language-server", "--stdio" },
 		filetypes = { "yaml", "yml" },
-		root_dir = util.root_pattern("azure-pipelines.yml"),
+		root_marker = {
+			".git",
+			"azure-pipelines.yml",
+			"azure-pipelines.yaml",
+			".azuredevops/**/.yml",
+			".azuredevops/**/.yaml",
+		},
 		single_file_support = true,
 		settings = {
 			yaml = {

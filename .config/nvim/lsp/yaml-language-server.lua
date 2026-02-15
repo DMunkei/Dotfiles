@@ -1,31 +1,3 @@
--- local ok, blink = pcall(require, "blink.cmp")
--- if not ok then
--- 	return {}
--- end
--- local capabilities = blink.get_lsp_capabilities()
--- return {
--- 	capabilities = capabilities,
--- 	cmd = { "yaml-language-server", "--stdio" },
--- 	filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
--- 	root_markers = function(fname)
--- 		return vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
--- 	end,
--- 	settings = {
--- 		yaml = {
--- 			schemaStore = {
--- 				enable = false,
--- 				url = "",
--- 			},
---
--- 			schemas = require("schemastore").yaml.schemas(),
--- 		},
--- 		redhat = {
--- 			telemetry = {
--- 				enabled = false,
--- 			},
--- 		},
--- 	},
--- }
 local ok, blink = pcall(require, "blink.cmp")
 if not ok then
 	return {}
@@ -36,28 +8,24 @@ local capabilities = blink.get_lsp_capabilities()
 return {
 	name = "yamlls",
 	cmd = { "yaml-language-server", "--stdio" },
-	filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
+	filetypes = { "yml", "yaml", "yaml.docker-compose", "yaml.gitlab" },
 	capabilities = capabilities,
-	root_dir = function(fname)
-		return vim.fs.dirname(vim.fs.find({
-			".git",
-			"azure-pipelines.yml",
-			"docker-compose.yml",
-			".yamllint",
-		}, { upward = true, path = fname })[1])
-	end,
 	settings = {
 		yaml = {
-			schemaStore = {
-				enable = false,
-				url = "",
-			},
 			schemas = {
-				{
-					name = "Azure Pipelines",
-					uri = "https://json.schemastore.org/azure-pipelines.json",
-					fileMatch = { "azure-pipelines.yml", "azure-pipelines.yaml" },
-				},
+				["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.32.1-standalone-strict/all.json"] = "/*.k8s.yaml",
+				["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+				["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+				["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
+				["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+				["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+				["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
+				["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+				["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
+				["https://json.schemastore.org/gitlab-ci"] = "*gitlab-ci*.{yml,yaml}",
+				["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
+				["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+				["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
 			},
 		},
 		redhat = {

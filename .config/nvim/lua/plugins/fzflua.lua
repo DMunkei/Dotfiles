@@ -141,5 +141,10 @@ return {
 			"<cmd>FzfLua git_branches<cr>",
 			"Fzf Show Git Branches",
 		},
+		{
+			"<leader>?",
+			"<cmd>FzfLua builtin<cr>",
+			"FZF show builtin",
+		},
 	},
 }

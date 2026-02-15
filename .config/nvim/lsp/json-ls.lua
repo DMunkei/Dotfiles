@@ -6,7 +6,7 @@ local capabilities = blink.get_lsp_capabilities()
 return {
 	capabilities = capabilities,
 	cmd = { "vscode-json-language-server", "--stdio" },
-	filetypes = { "json", "jsonc" },
+	filetypes = { "json", "jsonc", "json5" },
 	schemas = require("schemastore").json.schemas(),
 	validate = { enable = true },
 	init_options = {

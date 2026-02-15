@@ -15,7 +15,7 @@ return {
 		},
 		{
 			",r",
-			"<cmd>Trouble lsp_references win.position=left win.size=100<cr>",
+			"<cmd>Trouble lsp_references win.position=right win.size=100<cr>",
 			desc = "LSP References",
 		},
 		{

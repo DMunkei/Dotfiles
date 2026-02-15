@@ -34,5 +34,5 @@ for (let [key, value] of Object.entries(foobar)) {
             let d = b; 
         }
     }
-    console.log(d);
+    // console.log(d);
 }
