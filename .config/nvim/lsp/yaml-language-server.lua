@@ -8,7 +8,7 @@ local capabilities = blink.get_lsp_capabilities()
 return {
 	name = "yamlls",
 	cmd = { "yaml-language-server", "--stdio" },
-	filetypes = { "yml", "yaml", "yaml.docker-compose", "yaml.gitlab" },
+	filetypes = { "yml", "yaml", "yaml.docker-compose", "yaml.gitlab", "yaml.compose" },
 	capabilities = capabilities,
 	settings = {
 		yaml = {

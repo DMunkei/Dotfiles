@@ -59,3 +59,4 @@ vim.keymap.set("n", "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set("n", "<leader>q", "<c-w>q")
+vim.keymap.set("n", ",d", ":CodeDiff", { desc = "Code[D]iff " })

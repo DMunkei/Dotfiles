@@ -15,6 +15,7 @@ return {
 					-- To organize the imports.
 					"ruff_organize_imports",
 				},
+				go = { "golines", "gotests", "goimports" },
 				bash = { "shfmt" },
 				json = { "jq" },
 				yaml = { "yamlfix", "yamlfmt", "prettierd" },

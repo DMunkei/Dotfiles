@@ -7,8 +7,8 @@ return {
 	capabilities = { capabilities, didChangeWatchedFiles = { dynamicRegistration = true } },
 	cmd = { "basedpyright-langserver", "--stdio" },
 	on_init = function(client)
-		client.server_capabilities.documentSymbolsProvider = false
-		client.server_capabilities.documentSymbolProvider = false
+		-- client.server_capabilities.documentSymbolsProvider = false
+		-- client.server_capabilities.documentSymbolProvider = false
 		-- client.server_capabilities.definitionProvider = false
 		-- client.server_capabilities.typeDefinitionProvider = false
 	end,

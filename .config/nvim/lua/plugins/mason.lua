@@ -20,6 +20,7 @@ return {
 				"basedpyright",
 				-- "pylsp",
 				"ty",
+				"ts_ls",
 				-- "jedi_language_server",
 				"sqlls",
 				"dockerls",
